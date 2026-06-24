@@ -7,15 +7,11 @@
   <meta name="description" content="El Paso's only fully indoor golf academy. PGA-certified coaching by Yaser García & Memo Vega. Launch monitor technology, custom club fitting, junior programs. Book a lesson today." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://perfectswing4u.com/" />
-
-  <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Perfect Swing for You | Indoor Golf Academy – El Paso, TX" />
-  <meta property="og:description" content="PGA-certified instruction, launch monitor technology, and custom club fitting — all indoors. Book a lesson with Coach Yaser or Coach Memo." />
+  <meta property="og:description" content="PGA-certified instruction, launch monitor technology, and custom club fitting — all indoors. Book with Coach Yaser or Coach Memo." />
   <meta property="og:url" content="https://perfectswing4u.com/" />
-  <meta property="og:image" content="https://perfectswing4u.com/images/og-image.jpg" />
 
-  <!-- Structured Data: LocalBusiness -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -33,49 +29,36 @@
       "postalCode": "79912",
       "addressCountry": "US"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "31.8714",
-      "longitude": "-106.5513"
-    },
     "openingHoursSpecification": [
       { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "10:00", "closes": "18:00" }
     ],
-    "sameAs": [
-      "https://www.instagram.com/perfectswing4u/",
-      "https://www.facebook.com/perfectswingg4u/"
-    ],
+    "sameAs": ["https://www.instagram.com/perfectswing4u/", "https://www.facebook.com/perfectswingg4u/"],
     "priceRange": "$$"
   }
   </script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <style>
     /* ── TOKENS ── */
     :root {
-      --cream:    #F2EDE4;
-      --cream-2:  #E8E0D4;
-      --cream-3:  #DDD5C6;
-      --forest:   #1A3020;
-      --forest-2: #243D2A;
-      --olive:    #4A5E38;
-      --gold:     #B89B5E;
-      --gold-2:   #C9AC6E;
-      --black:    #0D0D0D;
-      --white:    #FFFFFF;
-      --text:     #1A1A1A;
-      --muted:    #6B6B5E;
+      --white:   #FFFFFF;
+      --off:     #F6F4F0;
+      --border:  #E8E5DF;
+      --text:    #0D0D0D;
+      --muted:   #7A7A72;
+      --forest:  #1A3020;
+      --forest2: #243D2A;
+      --gold:    #B89B5E;
+      --gold2:   #C9AC6E;
+      --black:   #0A0A0A;
 
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans:  'DM Sans', sans-serif;
       --mono:  'DM Mono', monospace;
-
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease:  cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     /* ── RESET ── */
@@ -83,131 +66,159 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--sans);
-      background: var(--cream);
+      background: var(--white);
       color: var(--text);
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+      cursor: none;
     }
     img { display: block; max-width: 100%; height: auto; }
-    a { color: inherit; text-decoration: none; }
-    button { cursor: pointer; border: none; background: none; font: inherit; }
+    a, button { color: inherit; text-decoration: none; cursor: none; }
+    button { border: none; background: none; font: inherit; }
+
+    /* ── CUSTOM CURSOR ── */
+    .c-dot {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: var(--text);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.2s, transform 0.15s var(--ease), background 0.3s;
+      will-change: left, top;
+    }
+    .c-ring {
+      position: fixed;
+      width: 30px; height: 30px;
+      border: 1px solid rgba(13,13,13,0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.35s var(--ease), height 0.35s var(--ease), border-color 0.3s, opacity 0.2s;
+      will-change: left, top;
+    }
+    body.cursor-hover .c-dot { transform: translate(-50%,-50%) scale(0); opacity: 0; }
+    body.cursor-hover .c-ring { width: 50px; height: 50px; border-color: rgba(13,13,13,0.5); }
+    body.cursor-dark .c-dot { background: var(--white); }
+    body.cursor-dark .c-ring { border-color: rgba(255,255,255,0.35); }
+    body.cursor-dark.cursor-hover .c-ring { border-color: rgba(255,255,255,0.6); }
 
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
+      inset: 0 0 auto 0;
+      z-index: 500;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.4rem 3rem;
+      padding: 1.5rem 3rem;
       transition: background 0.4s, backdrop-filter 0.4s, padding 0.3s;
     }
     nav.scrolled {
-      background: rgba(242,237,228,0.92);
+      background: rgba(255,255,255,0.92);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(26,48,32,0.1);
+      border-bottom: 1px solid var(--border);
       padding: 1rem 3rem;
     }
 
-    /* Logo */
-    .nav-logo { display: flex; align-items: center; gap: 0.75rem; }
-    .nav-logo-mark { width: 38px; height: 38px; flex-shrink: 0; }
+    .nav-logo { display: flex; align-items: center; gap: 0.8rem; }
+    .nav-logo-img {
+      width: 36px; height: 36px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s;
+    }
+    nav.scrolled .nav-logo-img { filter: brightness(0); }
     .nav-logo-text {
       font-family: var(--serif);
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 600;
-      color: var(--white);
       line-height: 1.15;
       letter-spacing: 0.01em;
+      color: var(--white);
       transition: color 0.3s;
     }
-    nav.scrolled .nav-logo-text { color: var(--forest); }
+    nav.scrolled .nav-logo-text { color: var(--text); }
 
-    /* Desktop links */
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 2.2rem;
       list-style: none;
     }
     .nav-links a {
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 400;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.8);
-      transition: color 0.25s;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
     }
     nav.scrolled .nav-links a { color: var(--muted); }
     .nav-links a:hover { color: var(--white); }
-    nav.scrolled .nav-links a:hover { color: var(--forest); }
-
+    nav.scrolled .nav-links a:hover { color: var(--text); }
     .nav-cta {
       font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.09em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--forest) !important;
       background: var(--white);
-      padding: 0.6rem 1.5rem;
+      padding: 0.58rem 1.4rem;
       border-radius: 2rem;
-      transition: background 0.25s, color 0.25s, transform 0.2s;
+      transition: background 0.2s, transform 0.15s;
     }
-    .nav-cta:hover { background: var(--cream); transform: translateY(-1px); }
-    nav.scrolled .nav-cta { background: var(--forest); color: var(--cream) !important; }
-    nav.scrolled .nav-cta:hover { background: var(--forest-2); }
+    .nav-cta:hover { background: var(--off); transform: translateY(-1px); }
+    nav.scrolled .nav-cta { background: var(--forest); color: var(--white) !important; }
+    nav.scrolled .nav-cta:hover { background: var(--forest2); }
 
-    /* Hamburger */
-    .nav-hamburger {
+    .hamburger {
       display: none;
       flex-direction: column;
       gap: 5px;
-      padding: 6px;
-      border-radius: 6px;
+      padding: 5px;
     }
-    .nav-hamburger span {
+    .hamburger span {
       display: block;
-      width: 22px;
-      height: 2px;
+      width: 22px; height: 1.5px;
       background: var(--white);
       border-radius: 2px;
       transition: transform 0.3s, opacity 0.3s, background 0.3s;
       transform-origin: center;
     }
-    nav.scrolled .nav-hamburger span { background: var(--forest); }
-    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
-    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    nav.scrolled .hamburger span { background: var(--text); }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* Mobile drawer */
-    .nav-drawer {
+    .drawer {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      inset: 0;
       background: var(--forest);
-      z-index: 190;
+      z-index: 490;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 2.5rem;
+      gap: 2.2rem;
       transform: translateY(-100%);
-      transition: transform 0.45s var(--ease-out);
+      transition: transform 0.48s var(--ease);
     }
-    .nav-drawer.open { transform: translateY(0); }
-    .nav-drawer a {
+    .drawer.open { transform: translateY(0); }
+    .drawer a {
       font-family: var(--serif);
-      font-size: 2.2rem;
+      font-size: 2.4rem;
       font-weight: 600;
-      color: var(--cream);
-      letter-spacing: 0.02em;
+      color: rgba(255,255,255,0.85);
       transition: color 0.2s;
     }
-    .nav-drawer a:hover { color: var(--gold); }
-    .nav-drawer .drawer-cta {
+    .drawer a:hover { color: var(--gold); }
+    .drawer .d-cta {
       font-family: var(--sans);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -215,7 +226,7 @@
       color: var(--forest);
       padding: 0.9rem 2.4rem;
       border-radius: 2rem;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
     }
 
     /* ── HERO ── */
@@ -224,99 +235,59 @@
       height: 100vh;
       min-height: 680px;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      align-items: flex-end;
       overflow: hidden;
     }
     .hero-bg {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(160deg, rgba(10,20,14,0.25) 0%, rgba(10,20,14,0.55) 50%, rgba(10,20,14,0.90) 100%),
-        url('https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1800&q=80&fm=webp') center/cover no-repeat;
-      transform-origin: center;
+        linear-gradient(160deg, rgba(10,20,14,0.2) 0%, rgba(10,20,14,0.5) 45%, rgba(10,20,14,0.92) 100%),
+        url('https://images.unsplash.com/photo-1535131749006-b7f58c99034b?w=1920&q=85&fm=webp') center/cover no-repeat;
     }
-
-    /* Floating stat cards */
-    .hero-stats {
-      position: absolute;
-      top: 50%;
-      right: 3.5rem;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .hero-stat-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-radius: 1rem;
-      padding: 1rem 1.5rem;
-      min-width: 175px;
-    }
-    .hero-stat-card .s-num {
-      font-family: var(--serif);
-      font-size: 2.1rem;
-      font-weight: 600;
-      color: var(--white);
-      line-height: 1;
-    }
-    .hero-stat-card .s-label {
-      font-size: 0.68rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.5);
-      margin-top: 0.35rem;
-    }
-
-    /* Hero content */
     .hero-content {
       position: relative;
-      padding: 0 3.5rem 5rem;
-      max-width: 780px;
+      padding: 0 3rem 5rem;
+      max-width: 820px;
     }
     .hero-eyebrow {
       font-family: var(--mono);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--gold);
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
-      gap: 0.9rem;
+      gap: 1rem;
     }
     .hero-eyebrow::before {
       content: '';
-      display: block;
-      width: 36px;
-      height: 1px;
+      width: 32px; height: 1px;
       background: var(--gold);
       flex-shrink: 0;
     }
-    .hero-headline {
+    h1 {
       font-family: var(--serif);
-      font-size: clamp(3.4rem, 7.5vw, 6.5rem);
+      font-size: clamp(3.6rem, 8vw, 7rem);
       font-weight: 600;
-      line-height: 0.96;
-      color: var(--white);
+      line-height: 0.94;
       letter-spacing: -0.015em;
+      color: var(--white);
       margin-bottom: 1.6rem;
     }
-    .hero-headline em {
+    h1 em {
       font-style: italic;
       font-weight: 400;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.55);
     }
     .hero-sub {
       font-size: 1rem;
       font-weight: 300;
-      color: rgba(255,255,255,0.68);
-      max-width: 440px;
-      line-height: 1.75;
-      margin-bottom: 2.6rem;
+      color: rgba(255,255,255,0.62);
+      max-width: 420px;
+      line-height: 1.78;
+      margin-bottom: 2.8rem;
     }
     .hero-actions {
       display: flex;
@@ -324,9 +295,8 @@
       gap: 1.6rem;
       flex-wrap: wrap;
     }
-    .btn-primary {
-      display: inline-block;
-      font-size: 0.78rem;
+    .btn-solid {
+      font-size: 0.76rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -334,172 +304,281 @@
       background: var(--white);
       padding: 0.9rem 2.2rem;
       border-radius: 2rem;
-      transition: background 0.25s, transform 0.2s;
+      transition: background 0.2s, transform 0.2s;
+      display: inline-block;
     }
-    .btn-primary:hover { background: var(--cream); transform: translateY(-2px); }
-    .btn-ghost {
-      font-size: 0.78rem;
+    .btn-solid:hover { background: var(--off); transform: translateY(-2px); }
+    .btn-outline {
+      font-size: 0.76rem;
       font-weight: 400;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.65);
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      transition: color 0.25s;
+      gap: 0.7rem;
+      transition: color 0.2s;
     }
-    .btn-ghost:hover { color: var(--white); }
-    .btn-ghost-circle {
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(255,255,255,0.35);
+    .btn-outline:hover { color: var(--white); }
+    .btn-circle {
+      width: 30px; height: 30px;
+      border: 1px solid rgba(255,255,255,0.3);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.85rem;
-      transition: border-color 0.25s;
+      transition: border-color 0.2s;
     }
-    .btn-ghost:hover .btn-ghost-circle { border-color: rgba(255,255,255,0.7); }
+    .btn-outline:hover .btn-circle { border-color: rgba(255,255,255,0.7); }
 
-    .scroll-hint {
+    /* Floating stat pills (hero, desktop) */
+    .hero-pills {
       position: absolute;
-      bottom: 2.5rem;
-      right: 3.5rem;
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      letter-spacing: 0.18em;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .hero-pill {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 0.9rem;
+      padding: 1rem 1.4rem;
+      min-width: 165px;
+    }
+    .pill-num {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 600;
+      color: var(--white);
+      line-height: 1;
+    }
+    .pill-label {
+      font-size: 0.66rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      writing-mode: vertical-rl;
-      transform: rotate(180deg);
+      color: rgba(255,255,255,0.45);
+      margin-top: 0.3rem;
     }
 
     /* ── MARQUEE ── */
-    .marquee-strip {
+    .marquee {
       background: var(--gold);
       overflow: hidden;
-      padding: 0.9rem 0;
+      padding: 0.85rem 0;
       white-space: nowrap;
     }
-    .marquee-inner {
+    .marquee-track {
       display: inline-flex;
-      animation: marquee 30s linear infinite;
+      animation: slide 28s linear infinite;
     }
     .marquee-item {
       font-family: var(--serif);
       font-size: 1rem;
       font-style: italic;
       color: var(--forest);
-      padding: 0 2.2rem;
+      padding: 0 2.5rem;
       display: inline-flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
     }
     .marquee-dot {
-      width: 5px; height: 5px;
+      width: 4px; height: 4px;
       border-radius: 50%;
       background: var(--forest);
-      opacity: 0.45;
+      opacity: 0.4;
       display: inline-block;
       flex-shrink: 0;
     }
-    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @keyframes slide { to { transform: translateX(-50%); } }
 
-    /* ── SECTION UTILITIES ── */
-    .section-label {
+    /* ── SECTION UTILS ── */
+    .s-label {
       font-family: var(--mono);
-      font-size: 0.66rem;
+      font-size: 0.65rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--muted);
       margin-bottom: 1rem;
+      display: block;
     }
-    .section-heading {
+    .s-heading {
       font-family: var(--serif);
-      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
       font-weight: 600;
-      line-height: 1.06;
+      line-height: 1.05;
       letter-spacing: -0.01em;
     }
-    .section-sub {
-      font-size: 0.95rem;
+    .s-sub {
+      font-size: 0.93rem;
       font-weight: 300;
       color: var(--muted);
-      line-height: 1.78;
+      line-height: 1.8;
+      max-width: 480px;
+    }
+
+    /* ── IMPACT / STATS (Golfair-inspired dashboard) ── */
+    #impact {
+      background: var(--white);
+      padding: 7rem 3rem;
+      text-align: center;
+    }
+    .impact-intro {
+      max-width: 640px;
+      margin: 0 auto 4rem;
+    }
+    .impact-intro .s-heading { margin-top: 0.5rem; }
+    .impact-intro p {
+      font-size: 0.93rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-top: 1.2rem;
+    }
+    .impact-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .impact-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 1.1rem;
+      padding: 1.8rem 1.6rem;
+      text-align: left;
+      transition: box-shadow 0.3s, transform 0.3s var(--ease);
+    }
+    .impact-card:hover {
+      box-shadow: 0 16px 40px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
+    }
+    .impact-card-icon {
+      width: 38px; height: 38px;
+      border-radius: 0.6rem;
+      background: var(--off);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+    }
+    .impact-card-num {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .impact-card-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.4rem;
+      line-height: 1.5;
+    }
+    .impact-card-sub {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .impact-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #2D8B4E;
+      flex-shrink: 0;
     }
 
     /* ── ABOUT ── */
     #about {
       background: var(--forest);
-      color: var(--cream);
+      color: var(--white);
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-      padding: 8rem 5rem;
+      gap: 0;
     }
-    #about .section-label { color: var(--gold); }
-    #about .section-heading { color: var(--cream); max-width: 420px; }
-    #about .section-sub { color: rgba(242,237,228,0.6); max-width: 440px; margin-top: 1.2rem; }
-    .about-features {
-      margin-top: 2.8rem;
+    .about-left {
+      padding: 7rem 4rem 7rem 5rem;
       display: flex;
       flex-direction: column;
-      gap: 1.1rem;
+      justify-content: center;
     }
-    .about-feature {
+    .about-left .s-label { color: var(--gold); }
+    .about-left .s-heading { color: var(--white); margin-top: 0.5rem; margin-bottom: 1.4rem; }
+    .about-left .s-sub { color: rgba(255,255,255,0.58); max-width: 400px; }
+    .about-features {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .about-feat {
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
-      font-size: 0.9rem;
-      color: rgba(242,237,228,0.78);
+      gap: 0.9rem;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.72);
       line-height: 1.65;
     }
-    .about-dot {
-      width: 6px; height: 6px;
+    .feat-dot {
+      width: 5px; height: 5px;
       border-radius: 50%;
       background: var(--gold);
-      margin-top: 0.5rem;
+      margin-top: 0.55rem;
       flex-shrink: 0;
     }
-    .about-right { position: relative; }
-    .about-img-main {
+    .about-right {
+      position: relative;
+      overflow: hidden;
+      min-height: 540px;
+    }
+    .about-photo {
       width: 100%;
-      aspect-ratio: 4/5;
+      height: 100%;
       object-fit: cover;
-      border-radius: 1.5rem;
-      filter: grayscale(15%);
+      object-position: top center;
+      display: block;
     }
-    .about-overlay {
+    .about-card {
       position: absolute;
-      bottom: -1.5rem;
-      left: -2rem;
-      background: var(--gold);
-      color: var(--forest);
-      padding: 1.3rem 1.8rem;
-      border-radius: 1rem;
-      min-width: 210px;
+      bottom: 2rem;
+      left: 2rem;
+      background: var(--white);
+      color: var(--text);
+      border-radius: 0.9rem;
+      padding: 1.2rem 1.6rem;
+      min-width: 195px;
     }
-    .about-overlay .ov-num {
+    .about-card-num {
       font-family: var(--serif);
-      font-size: 2.6rem;
+      font-size: 2.4rem;
       font-weight: 700;
       line-height: 1;
+      color: var(--forest);
     }
-    .about-overlay .ov-label {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-top: 0.3rem;
-      color: rgba(26,48,32,0.72);
+    .about-card-label {
+      font-size: 0.68rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+      letter-spacing: 0.03em;
+      line-height: 1.4;
     }
 
-    /* ── HOW IT WORKS ── */
+    /* ── PROCESS ── */
     #process {
-      background: var(--cream);
+      background: var(--white);
       padding: 8rem 5rem;
+      border-top: 1px solid var(--border);
     }
     .process-header {
       display: grid;
@@ -512,51 +591,35 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
-      position: relative;
-    }
-    .process-steps::before {
-      content: '';
-      position: absolute;
-      top: 2.4rem;
-      left: calc(16.666% + 1rem);
-      right: calc(16.666% + 1rem);
-      height: 1px;
-      background: linear-gradient(90deg, var(--cream-3), var(--cream-3));
-      pointer-events: none;
     }
     .process-step { display: flex; flex-direction: column; gap: 1.2rem; }
-    .step-number {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: var(--forest);
-      color: var(--cream);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .step-num {
       font-family: var(--mono);
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.05em;
-      position: relative;
-      z-index: 1;
-      flex-shrink: 0;
+      letter-spacing: 0.12em;
+      color: var(--muted);
     }
     .step-title {
       font-family: var(--serif);
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      line-height: 1.2;
+      line-height: 1.15;
       color: var(--text);
     }
+    .step-line {
+      width: 32px; height: 1px;
+      background: var(--gold);
+    }
     .step-desc {
-      font-size: 0.88rem;
+      font-size: 0.87rem;
       color: var(--muted);
-      line-height: 1.7;
+      line-height: 1.73;
     }
 
     /* ── SERVICES ── */
     #services {
-      background: var(--cream-2);
+      background: var(--off);
       padding: 8rem 5rem;
     }
     .services-header {
@@ -564,278 +627,265 @@
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: end;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
     }
     .services-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
+      gap: 1.25rem;
     }
-    .service-card {
+    .svc {
       background: var(--white);
-      border-radius: 1.25rem;
-      padding: 2.2rem;
-      position: relative;
-      overflow: hidden;
-      transition: transform 0.35s var(--ease-out), box-shadow 0.35s;
-      border: 1px solid rgba(26,48,32,0.07);
+      border: 1px solid var(--border);
+      border-radius: 1.1rem;
+      padding: 2rem;
+      transition: box-shadow 0.3s, transform 0.3s var(--ease);
     }
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 28px 56px rgba(26,48,32,0.13);
+    .svc:hover {
+      box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+      transform: translateY(-6px);
     }
-    .service-card.featured {
+    .svc.dark {
       background: var(--forest);
-      color: var(--cream);
+      border-color: transparent;
+      color: var(--white);
     }
-    .service-icon {
-      width: 46px; height: 46px;
-      border-radius: 0.8rem;
-      background: var(--cream-2);
+    .svc-icon {
+      width: 42px; height: 42px;
+      border-radius: 0.65rem;
+      background: var(--off);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      margin-bottom: 1.4rem;
     }
-    .service-card.featured .service-icon { background: rgba(255,255,255,0.1); }
-    .service-title {
+    .svc.dark .svc-icon { background: rgba(255,255,255,0.08); }
+    .svc-title {
       font-family: var(--serif);
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      margin-bottom: 0.6rem;
       line-height: 1.2;
+      margin-bottom: 0.5rem;
     }
-    .service-desc {
-      font-size: 0.84rem;
+    .svc-desc {
+      font-size: 0.83rem;
       color: var(--muted);
       line-height: 1.68;
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.5rem;
     }
-    .service-card.featured .service-desc { color: rgba(242,237,228,0.58); }
-    .service-price {
+    .svc.dark .svc-desc { color: rgba(255,255,255,0.52); }
+    .svc-price {
       font-family: var(--serif);
-      font-size: 2.1rem;
+      font-size: 2rem;
       font-weight: 600;
-      color: var(--forest);
+      color: var(--text);
       line-height: 1;
     }
-    .service-card.featured .service-price { color: var(--gold); }
-    .service-price-unit {
+    .svc.dark .svc-price { color: var(--gold); }
+    .svc-unit {
       font-family: var(--sans);
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       color: var(--muted);
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
     }
-    .service-card.featured .service-price-unit { color: rgba(242,237,228,0.45); }
-    .service-link {
+    .svc.dark .svc-unit { color: rgba(255,255,255,0.38); }
+    .svc-link {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      margin-top: 1.5rem;
-      font-size: 0.74rem;
+      gap: 0.4rem;
+      margin-top: 1.4rem;
+      font-size: 0.72rem;
       font-weight: 500;
       letter-spacing: 0.09em;
       text-transform: uppercase;
       color: var(--forest);
       transition: gap 0.2s;
     }
-    .service-card.featured .service-link { color: var(--gold); }
-    .service-link:hover { gap: 0.75rem; }
+    .svc.dark .svc-link { color: var(--gold); }
+    .svc-link:hover { gap: 0.7rem; }
 
-    /* Bundle wide card */
-    .service-card.wide {
+    /* Bundle: wide */
+    .svc.wide {
       grid-column: span 3;
       display: grid;
       grid-template-columns: 1fr auto;
       align-items: center;
-      gap: 2rem;
-      padding: 2.2rem 2.6rem;
+      gap: 2.5rem;
+      padding: 1.8rem 2.2rem;
     }
-    .bundle-price { text-align: right; }
     .bundle-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       font-family: var(--mono);
-      font-size: 0.62rem;
+      font-size: 0.6rem;
       font-weight: 500;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: var(--olive);
-      background: rgba(74,94,56,0.1);
+      color: var(--forest);
+      background: rgba(26,48,32,0.08);
+      padding: 0.22rem 0.65rem;
       border-radius: 2rem;
-      padding: 0.25rem 0.75rem;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
     }
+    .bundle-right { text-align: right; }
 
-    /* ── TECHNOLOGY ── */
+    /* ── TECHNOLOGY (Full-black, Golfair-inspired) ── */
     #technology {
       background: var(--black);
-      color: var(--cream);
+      color: var(--white);
       padding: 8rem 5rem;
+    }
+    .tech-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 6rem;
-      align-items: center;
+      align-items: start;
     }
-    #technology .section-label { color: var(--gold); }
-    #technology .section-heading { color: var(--cream); margin-top: 0.6rem; }
-    #technology .section-sub { color: rgba(242,237,228,0.48); margin-top: 1.2rem; max-width: 420px; }
+    .tech-left .s-label { color: var(--gold); }
+    .tech-left .s-heading { color: var(--white); margin-top: 0.5rem; }
+    .tech-left .s-sub { color: rgba(255,255,255,0.44); margin-top: 1.2rem; max-width: 400px; }
     .tech-metrics {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
+      gap: 1.2rem;
       margin-top: 3rem;
     }
-    .tech-metric {
-      border-top: 1px solid rgba(242,237,228,0.1);
-      padding-top: 1.4rem;
+    .tech-met {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.3rem;
     }
-    .tech-metric-num {
+    .tech-met-num {
       font-family: var(--serif);
-      font-size: 3.4rem;
+      font-size: 3.2rem;
       font-weight: 600;
       color: var(--white);
       line-height: 1;
       letter-spacing: -0.02em;
     }
-    .tech-metric-label {
-      font-size: 0.77rem;
-      color: rgba(242,237,228,0.4);
+    .tech-met-label {
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.38);
       margin-top: 0.4rem;
-      letter-spacing: 0.04em;
       line-height: 1.5;
     }
-    .tech-right {
+    .tech-features {
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1rem;
     }
-    .tech-feature {
+    .tech-feat {
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 1rem;
-      padding: 1.4rem 1.6rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 0.9rem;
+      padding: 1.3rem 1.5rem;
       display: flex;
       align-items: flex-start;
-      gap: 1.2rem;
-      transition: border-color 0.25s;
+      gap: 1.1rem;
+      transition: border-color 0.25s, background 0.25s;
     }
-    .tech-feature:hover { border-color: rgba(184,155,94,0.4); }
-    .tech-feature-icon {
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      margin-top: 0.1rem;
+    .tech-feat:hover {
+      border-color: rgba(184,155,94,0.3);
+      background: rgba(184,155,94,0.04);
     }
-    .tech-feature-title {
+    .feat-icon { font-size: 1.2rem; margin-top: 0.05rem; flex-shrink: 0; }
+    .feat-title {
       font-family: var(--serif);
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 0.3rem;
+      color: var(--white);
+      margin-bottom: 0.25rem;
     }
-    .tech-feature-desc {
-      font-size: 0.82rem;
-      color: rgba(242,237,228,0.5);
+    .feat-desc {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.44);
       line-height: 1.65;
     }
 
     /* ── COACHES ── */
     #coaches {
-      background: var(--cream);
+      background: var(--white);
       padding: 8rem 5rem;
+      border-top: 1px solid var(--border);
     }
     .coaches-intro {
-      max-width: 560px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
       margin-bottom: 4.5rem;
     }
-    .coaches-intro .section-heading { margin-top: 0.5rem; }
-    .coaches-intro .section-sub { margin-top: 1.2rem; }
     .coaches-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
+      gap: 2rem;
     }
     .coach-card {
       background: var(--white);
-      border-radius: 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 1.25rem;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      border: 1px solid rgba(26,48,32,0.06);
-      transition: box-shadow 0.35s, transform 0.35s var(--ease-out);
+      transition: box-shadow 0.35s, transform 0.35s var(--ease);
     }
     .coach-card:hover {
-      box-shadow: 0 24px 56px rgba(26,48,32,0.12);
-      transform: translateY(-4px);
+      box-shadow: 0 24px 56px rgba(0,0,0,0.1);
+      transform: translateY(-5px);
     }
-    .coach-img-wrap {
+    .coach-photo-wrap {
       position: relative;
       overflow: hidden;
-      background: var(--cream-2);
+      height: 320px;
+      background: var(--off);
     }
-    .coach-img {
+    .coach-photo {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: top center;
-      filter: grayscale(10%) contrast(1.04);
-      transition: transform 0.6s var(--ease-out);
+      transition: transform 0.6s var(--ease);
+      filter: grayscale(8%) contrast(1.04);
     }
-    .coach-card:hover .coach-img { transform: scale(1.05); }
-
-    /* Placeholder for when real photo isn't loaded */
-    .coach-img-placeholder {
-      width: 100%;
-      height: 100%;
-      min-height: 340px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(145deg, #2a4a35, #1a3020);
-    }
-    .coach-img-placeholder svg { opacity: 0.2; }
-
+    .coach-card:hover .coach-photo { transform: scale(1.04); }
     .coach-body {
-      padding: 2rem 1.8rem;
+      padding: 1.8rem;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0.8rem;
     }
     .coach-role {
       font-family: var(--mono);
-      font-size: 0.63rem;
+      font-size: 0.61rem;
       letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--olive);
+      color: var(--muted);
     }
     .coach-name {
       font-family: var(--serif);
-      font-size: 2rem;
+      font-size: 1.9rem;
       font-weight: 600;
-      line-height: 1.05;
-      color: var(--text);
+      line-height: 1.08;
     }
     .coach-creds {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
+      gap: 0.35rem;
+      margin-top: 0.1rem;
     }
-    .cred-tag {
-      font-size: 0.65rem;
+    .cred {
+      font-size: 0.63rem;
       font-weight: 500;
       letter-spacing: 0.06em;
       text-transform: uppercase;
-      background: var(--cream);
       color: var(--forest);
-      padding: 0.28rem 0.7rem;
+      background: rgba(26,48,32,0.07);
+      border: 1px solid rgba(26,48,32,0.1);
+      padding: 0.25rem 0.65rem;
       border-radius: 2rem;
-      border: 1px solid rgba(26,48,32,0.12);
     }
     .coach-quote {
       font-family: var(--serif);
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-style: italic;
       color: var(--muted);
       line-height: 1.62;
@@ -843,131 +893,158 @@
       padding-left: 1rem;
     }
     .coach-bio {
-      font-size: 0.81rem;
+      font-size: 0.8rem;
       color: var(--muted);
-      line-height: 1.72;
+      line-height: 1.75;
     }
 
     /* ── TESTIMONIALS ── */
     #testimonials {
-      background: var(--cream-2);
+      background: var(--off);
       padding: 8rem 5rem;
     }
-    .testimonials-header {
+    .t-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
     }
-    .reviews-link {
-      font-size: 0.77rem;
+    .all-reviews {
+      font-size: 0.75rem;
       font-weight: 500;
       letter-spacing: 0.09em;
       text-transform: uppercase;
-      color: var(--olive);
+      color: var(--muted);
       display: flex;
       align-items: center;
-      gap: 0.45rem;
-      transition: gap 0.2s;
+      gap: 0.4rem;
+      transition: gap 0.2s, color 0.2s;
     }
-    .reviews-link:hover { gap: 0.75rem; }
-    .testimonials-grid {
+    .all-reviews:hover { gap: 0.7rem; color: var(--text); }
+    .t-grid {
       display: grid;
-      grid-template-columns: 1.7fr 1fr 1fr;
-      gap: 1.5rem;
+      grid-template-columns: 1.65fr 1fr 1fr;
+      gap: 1.25rem;
       align-items: start;
     }
     .t-card {
       background: var(--white);
-      border-radius: 1.25rem;
-      padding: 2rem;
-      border: 1px solid rgba(26,48,32,0.07);
+      border: 1px solid var(--border);
+      border-radius: 1.1rem;
+      padding: 1.8rem;
       display: flex;
       flex-direction: column;
-      gap: 1.2rem;
+      gap: 1.1rem;
     }
-    .t-card.featured { background: var(--forest); color: var(--cream); }
-    .t-stars { display: flex; gap: 0.2rem; color: var(--gold); font-size: 0.9rem; }
+    .t-card.featured {
+      background: var(--forest);
+      border-color: transparent;
+      color: var(--white);
+    }
+    .t-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.05em; }
     .t-quote {
       font-family: var(--serif);
-      font-size: 1.12rem;
+      font-size: 1.08rem;
       font-weight: 400;
       line-height: 1.58;
       color: var(--text);
     }
-    .t-card.featured .t-quote { color: var(--cream); }
+    .t-card.featured .t-quote { color: var(--white); }
     .t-author {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.7rem;
       margin-top: auto;
     }
     .t-avatar {
-      width: 38px; height: 38px;
+      width: 36px; height: 36px;
       border-radius: 50%;
-      background: var(--cream-2);
+      background: var(--off);
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: var(--serif);
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--forest);
       flex-shrink: 0;
     }
-    .t-card.featured .t-avatar { background: rgba(255,255,255,0.12); color: var(--cream); }
-    .t-name { font-size: 0.82rem; font-weight: 500; color: var(--text); }
-    .t-card.featured .t-name { color: var(--cream); }
+    .t-card.featured .t-avatar { background: rgba(255,255,255,0.1); color: var(--white); }
+    .t-name { font-size: 0.8rem; font-weight: 500; }
+    .t-card.featured .t-name { color: var(--white); }
     .t-meta { font-size: 0.7rem; color: var(--muted); }
-    .t-card.featured .t-meta { color: rgba(242,237,228,0.48); }
+    .t-card.featured .t-meta { color: rgba(255,255,255,0.44); }
 
-    /* ── BOOKING / CONTACT ── */
+    /* ── CTA / BOOKING (Golfair dark section influence) ── */
     #book {
-      background: var(--forest);
-      padding: 8rem 5rem;
+      background: var(--black);
+      padding: 9rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    /* subtle texture */
+    #book::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(26,48,32,0.35) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .book-inner {
+      position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
       align-items: start;
     }
-    #book .section-label { color: var(--gold); }
-    #book .section-heading { color: var(--cream); font-size: clamp(2.2rem, 4vw, 3.4rem); margin-top: 0.5rem; }
-    #book .section-sub { color: rgba(242,237,228,0.58); margin-top: 1.2rem; margin-bottom: 2.4rem; }
-    .contact-list { display: flex; flex-direction: column; gap: 1.4rem; }
-    .contact-item {
+    .book-left .s-label { color: var(--gold); }
+    .book-left .s-heading {
+      color: var(--white);
+      font-size: clamp(2.4rem, 4.5vw, 3.6rem);
+      margin-top: 0.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .book-left .s-sub { color: rgba(255,255,255,0.48); margin-bottom: 2.5rem; }
+    .contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 1.3rem;
+    }
+    .contact-row {
       display: flex;
       align-items: flex-start;
       gap: 1rem;
     }
     .contact-icon {
-      width: 42px; height: 42px;
-      border-radius: 0.7rem;
-      background: rgba(255,255,255,0.07);
+      width: 40px; height: 40px;
+      border-radius: 0.6rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
+      font-size: 0.95rem;
       flex-shrink: 0;
     }
     .contact-label {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--gold);
       margin-bottom: 0.2rem;
     }
-    .contact-value {
-      font-size: 0.95rem;
-      color: var(--cream);
+    .contact-val {
+      font-size: 0.93rem;
+      color: var(--white);
       font-weight: 300;
       line-height: 1.5;
     }
-    .contact-value a { color: inherit; transition: color 0.2s; }
-    .contact-value a:hover { color: var(--gold); }
-    .book-btn {
+    .contact-val a { color: inherit; transition: color 0.2s; }
+    .contact-val a:hover { color: var(--gold); }
+    .book-cta {
       display: inline-block;
-      margin-top: 2.2rem;
-      font-size: 0.8rem;
+      margin-top: 2.5rem;
+      font-size: 0.78rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -975,53 +1052,52 @@
       background: var(--gold);
       padding: 1rem 2.4rem;
       border-radius: 2rem;
-      transition: background 0.25s, transform 0.2s;
+      transition: background 0.2s, transform 0.2s;
     }
-    .book-btn:hover { background: var(--gold-2); transform: translateY(-2px); }
+    .book-cta:hover { background: var(--gold2); transform: translateY(-2px); }
 
     .book-right {
       background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 1.5rem;
-      padding: 2.6rem;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 1.2rem;
+      padding: 2.4rem;
     }
     .hours-title {
       font-family: var(--serif);
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       font-weight: 600;
-      color: var(--cream);
-      margin-bottom: 1.6rem;
+      color: var(--white);
+      margin-bottom: 1.5rem;
     }
-    .hours-list { display: flex; flex-direction: column; gap: 0.8rem; }
-    .hours-row {
+    .hours {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .hr {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      font-size: 0.88rem;
+      font-size: 0.87rem;
     }
-    .hours-day { color: rgba(242,237,228,0.5); }
-    .hours-time { color: var(--cream); font-weight: 300; }
-    .hours-row.closed .hours-time { color: rgba(242,237,228,0.28); font-style: italic; }
-    .hours-divider {
-      height: 1px;
-      background: rgba(255,255,255,0.07);
-      margin: 1.4rem 0;
-    }
+    .hr-day { color: rgba(255,255,255,0.44); }
+    .hr-time { color: var(--white); font-weight: 300; }
+    .hr.closed .hr-time { color: rgba(255,255,255,0.22); font-style: italic; }
+    .hours-divider { height: 1px; background: rgba(255,255,255,0.07); margin: 1.3rem 0; }
     .follow-label {
-      font-size: 0.72rem;
-      color: rgba(242,237,228,0.38);
-      letter-spacing: 0.06em;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.32);
+      letter-spacing: 0.05em;
       margin-bottom: 1rem;
     }
-    .social-row { display: flex; gap: 0.75rem; }
+    .socials { display: flex; gap: 0.7rem; }
     .social-btn {
-      width: 40px; height: 40px;
+      width: 38px; height: 38px;
       border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.12);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(242,237,228,0.55);
+      color: rgba(255,255,255,0.5);
       transition: border-color 0.2s, color 0.2s;
     }
     .social-btn:hover { border-color: var(--gold); color: var(--gold); }
@@ -1029,16 +1105,22 @@
     /* ── FOOTER ── */
     footer {
       background: var(--black);
-      padding: 2.2rem 5rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 2rem 5rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      border-top: 1px solid rgba(255,255,255,0.05);
+      justify-content: space-between;
     }
-    .footer-left { display: flex; align-items: center; gap: 1rem; }
+    .footer-brand { display: flex; align-items: center; gap: 0.8rem; }
+    .footer-logo {
+      width: 26px; height: 26px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.35;
+    }
     .footer-copy {
-      font-size: 0.7rem;
-      color: rgba(255,255,255,0.22);
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.2);
       letter-spacing: 0.05em;
     }
     .footer-nav {
@@ -1047,118 +1129,113 @@
       list-style: none;
     }
     .footer-nav a {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
+      color: rgba(255,255,255,0.25);
       transition: color 0.2s;
     }
-    .footer-nav a:hover { color: rgba(255,255,255,0.65); }
+    .footer-nav a:hover { color: rgba(255,255,255,0.6); }
 
-    /* ── SCROLL REVEAL ── */
+    /* ── REVEAL ── */
     .reveal {
       opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.75s var(--ease-out), transform 0.75s var(--ease-out);
+      transform: translateY(24px);
+      transition: opacity 0.72s var(--ease), transform 0.72s var(--ease);
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+    .d5 { transition-delay: 0.4s; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1100px) {
-      #about, #technology, #book { gap: 3.5rem; }
-      .coach-card { grid-template-columns: 180px 1fr; }
+      .tech-inner { gap: 3.5rem; }
+      .coach-photo-wrap { height: 280px; }
     }
 
     @media (max-width: 900px) {
       nav { padding: 1.1rem 1.5rem; }
-      nav.scrolled { padding: 0.9rem 1.5rem; }
+      nav.scrolled { padding: 0.85rem 1.5rem; }
       .nav-links { display: none; }
-      .nav-hamburger { display: flex; }
+      .hamburger { display: flex; }
 
-      #about, #technology, #book {
-        grid-template-columns: 1fr;
-        padding: 5rem 1.5rem;
-        gap: 3rem;
-      }
-      #about .about-overlay { left: 0; }
+      h1 { font-size: 2.8rem; }
+      .hero-pills { display: none; }
+      .hero-content { padding: 0 1.5rem 4.5rem; }
+
+      #impact { padding: 5rem 1.5rem; }
+      .impact-cards { grid-template-columns: 1fr; max-width: 100%; }
+
+      #about { grid-template-columns: 1fr; }
+      .about-left { padding: 5rem 1.5rem; }
+      .about-right { min-height: 300px; }
+      .about-card { left: 1rem; bottom: 1rem; }
 
       #process { padding: 5rem 1.5rem; }
       .process-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
-      .process-steps { grid-template-columns: 1fr; }
-      .process-steps::before { display: none; }
+      .process-steps { grid-template-columns: 1fr; gap: 2.5rem; }
 
       #services { padding: 5rem 1.5rem; }
       .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
       .services-grid { grid-template-columns: 1fr; }
-      .service-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
-      .bundle-price { text-align: left; }
+      .svc.wide { grid-column: span 1; grid-template-columns: 1fr; }
+      .bundle-right { text-align: left; }
+
+      #technology { padding: 5rem 1.5rem; }
+      .tech-inner { grid-template-columns: 1fr; gap: 3rem; }
 
       #coaches { padding: 5rem 1.5rem; }
+      .coaches-intro { grid-template-columns: 1fr; gap: 1.5rem; }
       .coaches-grid { grid-template-columns: 1fr; }
-      .coach-card { grid-template-columns: 1fr; }
-      .coach-img-wrap { height: 280px; }
+      .coach-photo-wrap { height: 320px; }
 
       #testimonials { padding: 5rem 1.5rem; }
-      .testimonials-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .testimonials-grid { grid-template-columns: 1fr; }
+      .t-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .t-grid { grid-template-columns: 1fr; }
 
-      .hero-stats { display: none; }
-      .hero-content { padding: 0 1.5rem 4.5rem; }
+      #book { padding: 5rem 1.5rem; }
+      .book-inner { grid-template-columns: 1fr; gap: 3rem; }
 
-      footer {
-        flex-direction: column;
-        gap: 1.2rem;
-        text-align: center;
-        padding: 2rem 1.5rem;
-      }
-      .footer-left { flex-direction: column; gap: 0.5rem; }
-      .footer-nav { flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
+      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 1.8rem 1.5rem; }
+      .footer-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
     }
 
     @media (max-width: 600px) {
-      .hero-headline { font-size: 2.8rem; }
-      .hero-actions { flex-direction: column; align-items: flex-start; }
+      .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+
+    /* Hide custom cursor on touch devices */
+    @media (hover: none) {
+      .c-dot, .c-ring { display: none; }
+      body, a, button { cursor: auto; }
     }
   </style>
 </head>
 <body>
 
+  <!-- CURSOR -->
+  <div class="c-dot" id="c-dot" aria-hidden="true"></div>
+  <div class="c-ring" id="c-ring" aria-hidden="true"></div>
+
   <!-- MOBILE DRAWER -->
-  <div class="nav-drawer" id="nav-drawer" aria-hidden="true">
-    <a href="#about" class="drawer-link">About</a>
-    <a href="#services" class="drawer-link">Services</a>
-    <a href="#coaches" class="drawer-link">Coaches</a>
-    <a href="#testimonials" class="drawer-link">Reviews</a>
-    <a href="#book" class="drawer-link">Contact</a>
-    <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=mobile-menu" target="_blank" rel="noopener" class="drawer-cta">Book a Lesson</a>
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#coaches">Coaches</a>
+    <a href="#testimonials">Reviews</a>
+    <a href="#book">Contact</a>
+    <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=mobile-menu" target="_blank" rel="noopener" class="d-cta">Book a Lesson</a>
   </div>
 
   <!-- NAV -->
-  <nav id="main-nav" role="navigation" aria-label="Main navigation">
+  <nav id="nav" role="navigation" aria-label="Main navigation">
     <a href="#hero" class="nav-logo" aria-label="Perfect Swing for You – Home">
-      <!-- Logo: golfer silhouette in arc, matching the actual brand mark -->
-      <svg class="nav-logo-mark" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Outer arc / swing path -->
-        <path d="M8 32 C4 26 3 18 6 11 C9 5 15 2 22 3" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-        <!-- Head -->
-        <circle cx="21" cy="8" r="2.8" fill="white" opacity="0.92"/>
-        <!-- Body / torso -->
-        <path d="M21 11 C18.5 12.5 17 15 16.5 18 L15.5 23 L20 21 L21 27 L22 21 L26 23 L25 18 C24.5 15 23.5 12.5 21 11Z" fill="white" opacity="0.92"/>
-        <!-- Club shaft -->
-        <path d="M26 23 L30 14" stroke="white" stroke-width="1.3" stroke-linecap="round" opacity="0.75"/>
-        <!-- Club head -->
-        <circle cx="30.5" cy="13" r="1.2" fill="white" opacity="0.6"/>
-        <!-- Ground line -->
-        <path d="M11 32 L33 32" stroke="rgba(255,255,255,0.25)" stroke-width="1" stroke-linecap="round"/>
-      </svg>
+      <img class="nav-logo-img" src="public/images/logo.webp" alt="" aria-hidden="true" width="36" height="36" />
       <span class="nav-logo-text">Perfect Swing<br/>for You</span>
     </a>
-
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
@@ -1166,62 +1243,50 @@
       <li><a href="#testimonials">Reviews</a></li>
       <li><a href="#book">Contact</a></li>
       <li>
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=nav" target="_blank" rel="noopener" class="nav-cta">
-          Book a Lesson
-        </a>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=nav" target="_blank" rel="noopener" class="nav-cta">Book a Lesson</a>
       </li>
     </ul>
-
-    <button class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-drawer">
-      <span></span>
-      <span></span>
-      <span></span>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+      <span></span><span></span><span></span>
     </button>
   </nav>
 
-  <!-- ─── HERO ─── -->
+  <!-- HERO -->
   <section id="hero" aria-label="Hero">
     <div class="hero-bg" aria-hidden="true"></div>
-
-    <!-- Floating stat cards (desktop) -->
-    <div class="hero-stats" aria-hidden="true">
-      <div class="hero-stat-card reveal reveal-delay-1">
-        <div class="s-num">PGA</div>
-        <div class="s-label">Certified Instructors</div>
+    <div class="hero-pills" aria-hidden="true">
+      <div class="hero-pill reveal d1">
+        <div class="pill-num">PGA</div>
+        <div class="pill-label">Certified Instructors</div>
       </div>
-      <div class="hero-stat-card reveal reveal-delay-2">
-        <div class="s-num">100%</div>
-        <div class="s-label">Indoor, Year-Round</div>
+      <div class="hero-pill reveal d2">
+        <div class="pill-num">100%</div>
+        <div class="pill-label">Indoor, Year-Round</div>
       </div>
-      <div class="hero-stat-card reveal reveal-delay-3">
-        <div class="s-num">All</div>
-        <div class="s-label">Skill Levels Welcome</div>
+      <div class="hero-pill reveal d3">
+        <div class="pill-num">All</div>
+        <div class="pill-label">Skill Levels Welcome</div>
       </div>
     </div>
-
     <div class="hero-content">
       <div class="hero-eyebrow reveal">El Paso's Premier Indoor Golf Academy</div>
-      <h1 class="hero-headline reveal reveal-delay-1">
-        Your swing,<br/><em>perfected.</em>
-      </h1>
-      <p class="hero-sub reveal reveal-delay-2">
-        Personalized coaching backed by launch monitor data, video analysis, and custom club fitting — all climate-controlled indoors. No tee times. No excuses. Just real improvement.
+      <h1 class="reveal d1">Your swing,<br/><em>perfected.</em></h1>
+      <p class="hero-sub reveal d2">
+        Personalized coaching backed by launch monitor data, video analysis, and custom club fitting — all climate-controlled indoors. No tee times. No excuses.
       </p>
-      <div class="hero-actions reveal reveal-delay-3">
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=hero-cta" target="_blank" rel="noopener" class="btn-primary">Book a Lesson</a>
-        <a href="#services" class="btn-ghost">
-          <span class="btn-ghost-circle">↓</span>
+      <div class="hero-actions reveal d3">
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=hero" target="_blank" rel="noopener" class="btn-solid">Book a Lesson</a>
+        <a href="#services" class="btn-outline">
+          <span class="btn-circle">↓</span>
           See what we offer
         </a>
       </div>
     </div>
-
-    <div class="scroll-hint" aria-hidden="true">Scroll to explore</div>
   </section>
 
-  <!-- ─── MARQUEE ─── -->
-  <div class="marquee-strip" aria-hidden="true">
-    <div class="marquee-inner">
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
       <span class="marquee-item">Private Lessons <span class="marquee-dot"></span></span>
       <span class="marquee-item">Club Fitting <span class="marquee-dot"></span></span>
       <span class="marquee-item">Junior Programs <span class="marquee-dot"></span></span>
@@ -1230,7 +1295,6 @@
       <span class="marquee-item">Putting Analysis <span class="marquee-dot"></span></span>
       <span class="marquee-item">Club Repair <span class="marquee-dot"></span></span>
       <span class="marquee-item">TPI Fitness Certified <span class="marquee-dot"></span></span>
-      <!-- duplicate for seamless loop -->
       <span class="marquee-item">Private Lessons <span class="marquee-dot"></span></span>
       <span class="marquee-item">Club Fitting <span class="marquee-dot"></span></span>
       <span class="marquee-item">Junior Programs <span class="marquee-dot"></span></span>
@@ -1242,507 +1306,413 @@
     </div>
   </div>
 
-  <!-- ─── ABOUT ─── -->
-  <section id="about" aria-labelledby="about-heading">
-    <div class="reveal">
-      <div class="section-label">About the Academy</div>
-      <h2 id="about-heading" class="section-heading">Where every round<br/>gets better.</h2>
-      <p class="section-sub">
-        Perfect Swing for You is West El Paso's only fully indoor golf academy. We don't guess — we use real data to refine what you already have, giving you measurable improvement from session one.
-      </p>
-      <div class="about-features">
-        <div class="about-feature">
-          <div class="about-dot"></div>
-          <span>State-of-the-art launch monitors measuring ball speed, smash factor, launch angle, and spin rate in real time</span>
-        </div>
-        <div class="about-feature">
-          <div class="about-dot"></div>
-          <span>Full video analysis so you see exactly what your coach sees — no ambiguity about your swing</span>
-        </div>
-        <div class="about-feature">
-          <div class="about-dot"></div>
-          <span>Custom club fitting matched to your actual swing data, not brand preference or budget</span>
-        </div>
-        <div class="about-feature">
-          <div class="about-dot"></div>
-          <span>Open year-round, climate-controlled. No tee time required, no weather excuses</span>
-        </div>
-        <div class="about-feature">
-          <div class="about-dot"></div>
-          <span>Junior programs for all ages — from first-time beginners to competitive high school players</span>
-        </div>
-      </div>
+  <!-- IMPACT (dashboard stats) -->
+  <section id="impact" aria-labelledby="impact-heading">
+    <div class="impact-intro reveal">
+      <span class="s-label">Our Impact</span>
+      <h2 id="impact-heading" class="s-heading">Shaping a new standard<br/>in golf instruction.</h2>
+      <p>Our mission is a simple one: give every golfer — beginner or seasoned — access to professional-grade coaching, technology, and fitting in one climate-controlled studio.</p>
     </div>
-    <div class="about-right reveal reveal-delay-2">
-      <!--
-        PHOTO SLOT: Replace this src with the studio/lesson action photo.
-        Recommended size: 700×875px (4:5 ratio), JPG at 85% quality.
-        Place file at: /public/images/studio-lesson.jpg
-      -->
-      <img
-        class="about-img-main"
-        src="https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=700&q=80&fm=webp"
-        alt="Coach giving a golf lesson on the launch monitor at Perfect Swing for You indoor studio"
-        loading="lazy"
-        width="700"
-        height="875"
-      />
-      <div class="about-overlay">
-        <div class="ov-num">5864</div>
-        <div class="ov-label">N Mesa St, Suite A<br/>El Paso, TX 79912</div>
+    <div class="impact-cards">
+      <div class="impact-card reveal d1">
+        <div class="impact-card-icon">🎓</div>
+        <div class="impact-card-num">2</div>
+        <div class="impact-card-label">PGA-certified coaches<br/>on staff, full-time</div>
+        <div class="impact-card-sub"><span class="impact-dot"></span> Yaser García &amp; Memo Vega</div>
+      </div>
+      <div class="impact-card reveal d2">
+        <div class="impact-card-icon">🏠</div>
+        <div class="impact-card-num">100%</div>
+        <div class="impact-card-label">Indoor, climate-controlled<br/>open year-round</div>
+        <div class="impact-card-sub"><span class="impact-dot"></span> No tee times. No weather.</div>
+      </div>
+      <div class="impact-card reveal d3">
+        <div class="impact-card-icon">⭐</div>
+        <div class="impact-card-num">5★</div>
+        <div class="impact-card-label">Average student rating<br/>across all platforms</div>
+        <div class="impact-card-sub"><span class="impact-dot"></span> Consistently top-reviewed in El Paso</div>
       </div>
     </div>
   </section>
 
-  <!-- ─── HOW IT WORKS ─── -->
+  <!-- ABOUT -->
+  <section id="about" aria-labelledby="about-heading">
+    <div class="about-left reveal">
+      <span class="s-label">About the Academy</span>
+      <h2 id="about-heading" class="s-heading">Where every round<br/>gets better.</h2>
+      <p class="s-sub">Perfect Swing for You is West El Paso's only fully indoor golf academy. We don't guess — we use real data to refine what you already have, giving you measurable improvement from session one.</p>
+      <div class="about-features">
+        <div class="about-feat"><div class="feat-dot"></div><span>State-of-the-art launch monitors measuring ball speed, smash factor, launch angle, and spin rate in real time</span></div>
+        <div class="about-feat"><div class="feat-dot"></div><span>Full video analysis so you see exactly what your coach sees — no ambiguity about your swing</span></div>
+        <div class="about-feat"><div class="feat-dot"></div><span>Custom club fitting matched to your actual swing data, not brand preference or budget</span></div>
+        <div class="about-feat"><div class="feat-dot"></div><span>Open year-round, climate-controlled. No tee time required, no weather delays</span></div>
+        <div class="about-feat"><div class="feat-dot"></div><span>Junior programs for all ages — first-time beginners through competitive high school players</span></div>
+      </div>
+    </div>
+    <div class="about-right reveal d2">
+      <img
+        class="about-photo"
+        src="https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=900&q=85&fm=webp"
+        alt="Indoor golf lesson at Perfect Swing for You studio"
+        loading="lazy"
+        width="900"
+        height="1100"
+      />
+      <div class="about-card">
+        <div class="about-card-num">5864</div>
+        <div class="about-card-label">N Mesa St, Suite A<br/>El Paso, TX 79912</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
   <section id="process" aria-labelledby="process-heading">
     <div class="process-header">
       <div class="reveal">
-        <div class="section-label">The Process</div>
-        <h2 id="process-heading" class="section-heading">Simple from<br/>the start.</h2>
+        <span class="s-label">The Process</span>
+        <h2 id="process-heading" class="s-heading">Simple from<br/>the start.</h2>
       </div>
-      <p class="section-sub reveal reveal-delay-1">
-        Whether you've never held a club or you're shaving strokes off a single-digit handicap, the path forward is the same: book, show up, improve.
-      </p>
+      <p class="s-sub reveal d1">Whether you've never held a club or you're shaving strokes off a single-digit handicap — the path forward is the same.</p>
     </div>
     <div class="process-steps">
       <div class="process-step reveal">
-        <div class="step-number">01</div>
+        <div class="step-num">01</div>
+        <div class="step-line"></div>
         <div class="step-title">Book Your Session</div>
-        <div class="step-desc">Reserve online in under two minutes through our booking system. Choose your coach, pick your service, and pick a time that works. Walk-ins are always welcome when coaches are available.</div>
+        <div class="step-desc">Reserve online in under two minutes. Choose your coach, pick your service, and find a time that works. Walk-ins are always welcome when coaches are available.</div>
       </div>
-      <div class="process-step reveal reveal-delay-2">
-        <div class="step-number">02</div>
+      <div class="process-step reveal d2">
+        <div class="step-num">02</div>
+        <div class="step-line"></div>
         <div class="step-title">Get on the Monitor</div>
-        <div class="step-desc">Your first session starts with a data baseline — ball speed, launch angle, spin rate, smash factor. Your coach identifies the one or two things that will unlock the most improvement for your specific swing.</div>
+        <div class="step-desc">Your first session starts with a full data baseline — ball speed, launch angle, spin rate, smash factor. Your coach identifies the highest-leverage changes for your specific swing.</div>
       </div>
-      <div class="process-step reveal reveal-delay-4">
-        <div class="step-number">03</div>
+      <div class="process-step reveal d4">
+        <div class="step-num">03</div>
+        <div class="step-line"></div>
         <div class="step-title">Track Real Progress</div>
-        <div class="step-desc">Every session produces numbers you can measure against. You'll leave with specific drills, a clear sense of what's improving, and a plan for your next session. The data doesn't lie — and neither does the scoreboard.</div>
+        <div class="step-desc">Every session produces numbers you can track and compare. You'll leave with specific drills, a clear improvement plan, and data that proves you're getting better.</div>
       </div>
     </div>
   </section>
 
-  <!-- ─── SERVICES ─── -->
+  <!-- SERVICES -->
   <section id="services" aria-labelledby="services-heading">
     <div class="services-header">
       <div class="reveal">
-        <div class="section-label">What We Offer</div>
-        <h2 id="services-heading" class="section-heading">Every part<br/>of your game.</h2>
+        <span class="s-label">What We Offer</span>
+        <h2 id="services-heading" class="s-heading">Every part<br/>of your game.</h2>
       </div>
-      <p class="section-sub reveal reveal-delay-1">
-        From your first lesson to tournament prep, we have a program for your skill level and your schedule.
-      </p>
+      <p class="s-sub reveal d1">From your first lesson to tournament prep — programs for every skill level and schedule.</p>
     </div>
-
     <div class="services-grid">
-      <!-- Private Lesson -->
-      <div class="service-card reveal">
-        <div class="service-icon">⛳</div>
-        <div class="service-title">Private Lesson</div>
-        <div class="service-desc">One-on-one coaching with full launch monitor data and video analysis. Your coach dials in your specific swing — not a generic fix.</div>
-        <div class="service-price">$80 <span class="service-price-unit">/ 60 min</span></div>
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=service-card&utm_content=private" target="_blank" rel="noopener" class="service-link">Book now →</a>
+      <div class="svc reveal">
+        <div class="svc-icon">⛳</div>
+        <div class="svc-title">Private Lesson</div>
+        <div class="svc-desc">One-on-one coaching with full launch monitor data and video analysis. Your coach dials in your specific swing — not a generic fix.</div>
+        <div class="svc-price">$80 <span class="svc-unit">/ 60 min</span></div>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=svc&utm_content=private" target="_blank" rel="noopener" class="svc-link">Book now →</a>
       </div>
-
-      <!-- Junior Lesson (Featured) -->
-      <div class="service-card featured reveal reveal-delay-1">
-        <div class="service-icon">🎯</div>
-        <div class="service-title">Junior Lesson</div>
-        <div class="service-desc">Structured, patient instruction built for young golfers. Perfect from first-time beginners through competitive junior players.</div>
-        <div class="service-price">$50 <span class="service-price-unit">/ 60 min</span></div>
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=service-card&utm_content=junior" target="_blank" rel="noopener" class="service-link">Book now →</a>
+      <div class="svc dark reveal d1">
+        <div class="svc-icon">🎯</div>
+        <div class="svc-title">Junior Lesson</div>
+        <div class="svc-desc">Structured, patient instruction built for young golfers. Perfect from first-time beginners through competitive junior players.</div>
+        <div class="svc-price">$50 <span class="svc-unit">/ 60 min</span></div>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=svc&utm_content=junior" target="_blank" rel="noopener" class="svc-link">Book now →</a>
       </div>
-
-      <!-- High School -->
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">🏫</div>
-        <div class="service-title">High School Lesson</div>
-        <div class="service-desc">Performance-focused coaching for competitive high school athletes. Ball-striking consistency, course management, and mental game.</div>
-        <div class="service-price">$60 <span class="service-price-unit">/ 60 min</span></div>
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=service-card&utm_content=hs" target="_blank" rel="noopener" class="service-link">Book now →</a>
+      <div class="svc reveal d2">
+        <div class="svc-icon">🏫</div>
+        <div class="svc-title">High School Lesson</div>
+        <div class="svc-desc">Performance-focused coaching for competitive high school athletes. Ball-striking consistency, course management, and mental game.</div>
+        <div class="svc-price">$60 <span class="svc-unit">/ 60 min</span></div>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=svc&utm_content=hs" target="_blank" rel="noopener" class="svc-link">Book now →</a>
       </div>
-
-      <!-- Driver Fitting -->
-      <div class="service-card reveal">
-        <div class="service-icon">🔧</div>
-        <div class="service-title">Driver Fitting</div>
-        <div class="service-desc">More fairways, more distance. We analyze your data and match you to the right head, shaft, and loft — backed by numbers, not guesswork.</div>
-        <div class="service-price">$60 <span class="service-price-unit">/ session</span></div>
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=service-card&utm_content=driver" target="_blank" rel="noopener" class="service-link">Book now →</a>
+      <div class="svc reveal">
+        <div class="svc-icon">🔧</div>
+        <div class="svc-title">Driver Fitting</div>
+        <div class="svc-desc">More fairways, more distance. We analyze your data and match you to the right head, shaft, and loft — backed by numbers, not guesswork.</div>
+        <div class="svc-price">$60 <span class="svc-unit">/ session</span></div>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=svc&utm_content=driver" target="_blank" rel="noopener" class="svc-link">Book now →</a>
       </div>
-
-      <!-- Iron Fitting -->
-      <div class="service-card reveal reveal-delay-1">
-        <div class="service-icon">🏌️</div>
-        <div class="service-title">Iron Fitting</div>
-        <div class="service-desc">Shaft flex, length, lie angle, grip size — we go deep. The numbers translate directly to better approach shots and tighter dispersion.</div>
-        <div class="service-price">$80 <span class="service-price-unit">/ session</span></div>
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=service-card&utm_content=irons" target="_blank" rel="noopener" class="service-link">Book now →</a>
+      <div class="svc reveal d1">
+        <div class="svc-icon">🏌️</div>
+        <div class="svc-title">Iron Fitting</div>
+        <div class="svc-desc">Shaft flex, length, lie angle, grip size — we go deep. The numbers translate directly to better approach shots and tighter dispersion.</div>
+        <div class="svc-price">$80 <span class="svc-unit">/ session</span></div>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=svc&utm_content=irons" target="_blank" rel="noopener" class="svc-link">Book now →</a>
       </div>
-
-      <!-- Full Bag -->
-      <div class="service-card reveal reveal-delay-2">
-        <div class="service-icon">🎒</div>
-        <div class="service-title">Full Bag Fitting</div>
-        <div class="service-desc">Every club optimized to your swing. Driver through wedges — the most comprehensive fitting session we offer.</div>
-        <div class="service-price">$160 <span class="service-price-unit">/ session</span></div>
-        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=service-card&utm_content=bag" target="_blank" rel="noopener" class="service-link">Book now →</a>
+      <div class="svc reveal d2">
+        <div class="svc-icon">🎒</div>
+        <div class="svc-title">Full Bag Fitting</div>
+        <div class="svc-desc">Every club optimized to your swing — driver through wedges. Our most comprehensive fitting session.</div>
+        <div class="svc-price">$160 <span class="svc-unit">/ session</span></div>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=svc&utm_content=bag" target="_blank" rel="noopener" class="svc-link">Book now →</a>
       </div>
-
-      <!-- Bundle -->
-      <div class="service-card wide reveal">
+      <div class="svc wide reveal">
         <div>
           <div class="bundle-badge">★ Best Value</div>
-          <div class="service-title" style="font-size:1.7rem;">Swing + Putting Bundle</div>
-          <div class="service-desc" style="max-width:520px; margin-top:0.5rem;">
-            Three 60-minute swing lessons plus two 30-minute putting sessions — the fastest path to a complete game upgrade. Structured for measurable progress across five sessions with the same coach.
+          <div class="svc-title" style="font-size:1.65rem;">Swing + Putting Bundle</div>
+          <div class="svc-desc" style="max-width:500px; margin-top:0.4rem;">Three 60-minute swing lessons plus two 30-minute putting sessions — the fastest path to a complete game upgrade. Structured for measurable progress across five sessions.</div>
+        </div>
+        <div class="bundle-right">
+          <div class="svc-price" style="font-size:2.7rem;">$350</div>
+          <div class="svc-unit" style="margin-top:0.3rem;">5-session package</div>
+          <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=svc&utm_content=bundle" target="_blank" rel="noopener" class="svc-link" style="margin-top:1.1rem;">Get the bundle →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECHNOLOGY -->
+  <section id="technology" aria-labelledby="tech-heading">
+    <div class="tech-inner">
+      <div class="tech-left reveal">
+        <span class="s-label">Our Technology</span>
+        <h2 id="tech-heading" class="s-heading">Data doesn't lie.<br/><em style="font-style:italic;color:rgba(255,255,255,0.38)">Guessing does.</em></h2>
+        <p class="s-sub">Every session produces a full data profile of your swing. You don't just feel the improvement — you see it in the numbers.</p>
+        <div class="tech-metrics">
+          <div class="tech-met reveal d1">
+            <div class="tech-met-num">100%</div>
+            <div class="tech-met-label">Indoor, climate-<br/>controlled year-round</div>
+          </div>
+          <div class="tech-met reveal d2">
+            <div class="tech-met-num">2</div>
+            <div class="tech-met-label">PGA-certified coaches<br/>on staff</div>
+          </div>
+          <div class="tech-met reveal d3">
+            <div class="tech-met-num">All</div>
+            <div class="tech-met-label">Skill levels — beginner<br/>to competitive</div>
+          </div>
+          <div class="tech-met reveal d4">
+            <div class="tech-met-num">1st</div>
+            <div class="tech-met-label">El Paso's only<br/>fully indoor academy</div>
           </div>
         </div>
-        <div class="bundle-price">
-          <div class="service-price" style="font-size:2.8rem;">$350</div>
-          <div class="service-price-unit" style="margin-top:0.4rem;">5-session package</div>
-          <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=service-card&utm_content=bundle" target="_blank" rel="noopener" class="service-link" style="margin-top:1.2rem;">Get the bundle →</a>
+      </div>
+      <div class="tech-features">
+        <div class="tech-feat reveal d1">
+          <div class="feat-icon">📡</div>
+          <div>
+            <div class="feat-title">Launch Monitor Analysis</div>
+            <div class="feat-desc">Ball speed, smash factor, launch angle, spin rate, and carry distance — measured on every single shot, not estimated.</div>
+          </div>
+        </div>
+        <div class="tech-feat reveal d2">
+          <div class="feat-icon">🎥</div>
+          <div>
+            <div class="feat-title">Video Swing Analysis</div>
+            <div class="feat-desc">Multi-angle breakdown so you see exactly what your coach sees. Blind spots disappear when you can watch yourself swing.</div>
+          </div>
+        </div>
+        <div class="tech-feat reveal d3">
+          <div class="feat-icon">🎯</div>
+          <div>
+            <div class="feat-title">Capto Putting Analysis</div>
+            <div class="feat-desc">Coach Yaser is Capto Putting Certified — using advanced putter-path technology to fix your stroke at the source.</div>
+          </div>
+        </div>
+        <div class="tech-feat reveal d4">
+          <div class="feat-icon">💪</div>
+          <div>
+            <div class="feat-title">TPI Fitness Assessment</div>
+            <div class="feat-desc">Physical limitations affect your swing. Our TPI Level 2 certified coaching addresses golf fitness as part of a complete improvement plan.</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── TECHNOLOGY ─── -->
-  <section id="technology" aria-labelledby="tech-heading">
-    <div class="reveal">
-      <div class="section-label">Our Technology</div>
-      <h2 id="tech-heading" class="section-heading">Data doesn't lie.<br/><em style="font-style:italic; color:rgba(242,237,228,0.55);">Guessing does.</em></h2>
-      <p class="section-sub">
-        Every session at Perfect Swing produces a full data profile of your swing. You don't just feel the improvement — you see it in the numbers.
-      </p>
-      <div class="tech-metrics">
-        <div class="tech-metric reveal reveal-delay-1">
-          <div class="tech-metric-num">100%</div>
-          <div class="tech-metric-label">Indoor, climate-<br/>controlled year-round</div>
-        </div>
-        <div class="tech-metric reveal reveal-delay-2">
-          <div class="tech-metric-num">2</div>
-          <div class="tech-metric-label">PGA-certified coaches<br/>on staff</div>
-        </div>
-        <div class="tech-metric reveal reveal-delay-3">
-          <div class="tech-metric-num">All</div>
-          <div class="tech-metric-label">Skill levels — beginner<br/>to competitive</div>
-        </div>
-        <div class="tech-metric reveal reveal-delay-4">
-          <div class="tech-metric-num">1st</div>
-          <div class="tech-metric-label">El Paso's only<br/>fully indoor academy</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="tech-right">
-      <div class="tech-feature reveal reveal-delay-1">
-        <div class="tech-feature-icon">📡</div>
-        <div>
-          <div class="tech-feature-title">Launch Monitor Analysis</div>
-          <div class="tech-feature-desc">Ball speed, smash factor, launch angle, spin rate, and carry distance — measured on every single shot, not estimated.</div>
-        </div>
-      </div>
-      <div class="tech-feature reveal reveal-delay-2">
-        <div class="tech-feature-icon">🎥</div>
-        <div>
-          <div class="tech-feature-title">Video Swing Analysis</div>
-          <div class="tech-feature-desc">Multi-angle video breakdown so you see exactly what your coach sees. Blind spots disappear when you can watch yourself swing.</div>
-        </div>
-      </div>
-      <div class="tech-feature reveal reveal-delay-3">
-        <div class="tech-feature-icon">🎯</div>
-        <div>
-          <div class="tech-feature-title">Capto Putting Analysis</div>
-          <div class="tech-feature-desc">Coach Yaser is Capto Putting Certified — using advanced putter-path technology to fix your stroke at the source.</div>
-        </div>
-      </div>
-      <div class="tech-feature reveal reveal-delay-4">
-        <div class="tech-feature-icon">💪</div>
-        <div>
-          <div class="tech-feature-title">TPI Fitness Assessment</div>
-          <div class="tech-feature-desc">Physical limitations affect your swing. Our TPI Level 2 certified coaching addresses golf fitness as part of a complete improvement plan.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ─── COACHES ─── -->
+  <!-- COACHES -->
   <section id="coaches" aria-labelledby="coaches-heading">
-    <div class="coaches-intro reveal">
-      <div class="section-label">Meet the Coaches</div>
-      <h2 id="coaches-heading" class="section-heading">Two experts.<br/>One shared goal.</h2>
-      <p class="section-sub">Both coaches compete actively in local and regional tournaments — meaning the instruction you get is current, practical, and proven on the course. Not just in a textbook.</p>
+    <div class="coaches-intro">
+      <div class="reveal">
+        <span class="s-label">Meet the Coaches</span>
+        <h2 id="coaches-heading" class="s-heading">Two experts.<br/>One shared goal.</h2>
+      </div>
+      <p class="s-sub reveal d1">Both coaches compete actively in local and regional tournaments — meaning the instruction you get is current, practical, and proven on the course. Not just in a textbook.</p>
     </div>
-
     <div class="coaches-grid">
-      <!-- Coach Yaser -->
+      <!-- Yaser -->
       <div class="coach-card reveal">
-        <div class="coach-img-wrap">
-          <!--
-            PHOTO: Replace src with Yaser's actual headshot.
-            File: /public/images/yaser-garcia.jpg
-            Recommended: 440×560px, object-position: top center
-            The real headshot shows Yaser in a navy blue polo with PXG cap,
-            arms crossed, in front of a green artificial grass backdrop.
-          -->
+        <div class="coach-photo-wrap">
           <img
-            class="coach-img"
-            src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=440&q=80&fm=webp"
+            class="coach-photo"
+            src="public/images/yaser-garcia.webp"
             alt="Yaser García – PGA Professional, Head Coach and founder of Perfect Swing for You"
-            id="yaser-img"
             loading="lazy"
             width="440"
-            height="560"
+            height="320"
           />
         </div>
         <div class="coach-body">
           <div class="coach-role">Head Coach &amp; Academy Founder</div>
-          <div class="coach-name">Yaser<br/>García</div>
+          <div class="coach-name">Yaser García</div>
           <div class="coach-creds">
-            <span class="cred-tag">PGA PGM</span>
-            <span class="cred-tag">TPI Level 2</span>
-            <span class="cred-tag">Capto Putting Certified</span>
-            <span class="cred-tag">Club Fitting Expert</span>
+            <span class="cred">PGA PGM</span>
+            <span class="cred">TPI Level 2</span>
+            <span class="cred">Capto Putting Certified</span>
+            <span class="cred">Club Fitting Expert</span>
           </div>
-          <blockquote class="coach-quote">
-            "No two golfers are the same. I work closely with you to understand your strengths and areas for improvement, and develop a coaching plan tailored to your unique needs and goals."
-          </blockquote>
-          <p class="coach-bio">
-            Yaser's methodology covers all three pillars of the game: physical conditioning, mental preparation, and technical skills training working together as one system. With 13+ years playing competitive golf, he got so passionate about the game that he dedicated his career to sharing it with others. He brings swing mechanics, putting mastery (Capto certified), golf fitness (TPI Level 2), and club fitting expertise all under one roof.
-          </p>
+          <blockquote class="coach-quote">"No two golfers are the same. I work closely with you to understand your strengths and areas for improvement, and develop a coaching plan tailored to your unique needs and goals."</blockquote>
+          <p class="coach-bio">Yaser's methodology covers all three pillars: physical conditioning, mental preparation, and technical skills training working together as one system. With 13+ years playing competitive golf, he dedicated his career to sharing the game — bringing swing mechanics, Capto putting mastery, TPI fitness, and club fitting expertise under one roof.</p>
         </div>
       </div>
-
-      <!-- Coach Memo -->
-      <div class="coach-card reveal reveal-delay-2">
-        <div class="coach-img-wrap">
-          <!--
-            PHOTO: Replace src with Memo's actual headshot.
-            File: /public/images/memo-vega.jpg
-            Recommended: 440×560px, object-position: top center
-            The real headshot shows Memo in an orange striped polo with glasses,
-            arms crossed and smiling, in front of a green artificial grass backdrop.
-          -->
+      <!-- Memo -->
+      <div class="coach-card reveal d2">
+        <div class="coach-photo-wrap">
           <img
-            class="coach-img"
-            src="https://images.unsplash.com/photo-1576858574144-9ae1ebcf5ae5?w=440&q=80&fm=webp"
+            class="coach-photo"
+            src="public/images/memo-vega.webp"
             alt="Memo Vega – PGA PGM Level 3 Candidate and Instructor at Perfect Swing for You"
-            id="memo-img"
             loading="lazy"
             width="440"
-            height="560"
+            height="320"
           />
         </div>
         <div class="coach-body">
           <div class="coach-role">Instructor &amp; Club Fitting Specialist</div>
-          <div class="coach-name">Memo<br/>Vega</div>
+          <div class="coach-name">Memo Vega</div>
           <div class="coach-creds">
-            <span class="cred-tag">PGA PGM Level 3 Candidate</span>
-            <span class="cred-tag">ADM Certified</span>
-            <span class="cred-tag">Teaching &amp; Coaching</span>
+            <span class="cred">PGA PGM Level 3 Candidate</span>
+            <span class="cred">ADM Certified</span>
+            <span class="cred">Teaching &amp; Coaching</span>
           </div>
-          <blockquote class="coach-quote">
-            "I pride myself on providing a personalized approach to each of my students — understanding the cause-and-effect relationship between actions and outcomes on the course."
-          </blockquote>
-          <p class="coach-bio">
-            Memo's teaching philosophy is rooted in the mental side of the game. He uses effective communication and visualization techniques to make improvement stick between sessions, not just on the lesson mat. His patient, step-by-step approach has produced measurable results for students ranging from absolute beginners to competitive high school athletes — often in a single lesson.
-          </p>
+          <blockquote class="coach-quote">"I pride myself on providing a personalized approach to each of my students — understanding the cause-and-effect relationship between actions and outcomes on the course."</blockquote>
+          <p class="coach-bio">Memo's teaching philosophy is rooted in the mental side of the game. He uses communication and visualization techniques to make improvement stick between sessions, not just on the lesson mat. His patient, step-by-step approach has produced measurable results for everyone from beginners to competitive high school athletes.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── TESTIMONIALS ─── -->
+  <!-- TESTIMONIALS -->
   <section id="testimonials" aria-labelledby="reviews-heading">
-    <div class="testimonials-header">
+    <div class="t-header">
       <div class="reveal">
-        <div class="section-label">Student Reviews</div>
-        <h2 id="reviews-heading" class="section-heading">What golfers<br/>are saying.</h2>
+        <span class="s-label">Student Reviews</span>
+        <h2 id="reviews-heading" class="s-heading">What golfers<br/>are saying.</h2>
       </div>
-      <a href="https://www.facebook.com/perfectswingg4u/" target="_blank" rel="noopener" class="reviews-link reveal">
-        Read all reviews →
-      </a>
+      <a href="https://www.facebook.com/perfectswingg4u/" target="_blank" rel="noopener" class="all-reviews reveal">Read all reviews →</a>
     </div>
-
-    <div class="testimonials-grid">
+    <div class="t-grid">
       <div class="t-card featured reveal">
-        <div class="t-stars" aria-label="5 stars">★★★★★</div>
+        <div class="t-stars">★★★★★</div>
         <p class="t-quote">"Did the 5-lesson package with Memo. Really nice guy and great instructor. I can see a real difference from where my swing was when I walked in to where it is now. He gave me advice on things to practice at the range and how to think on the course. 100% recommend."</p>
         <div class="t-author">
           <div class="t-avatar" aria-hidden="true">R</div>
-          <div>
-            <div class="t-name">Robert M.</div>
-            <div class="t-meta">Private Lesson Package</div>
-          </div>
+          <div><div class="t-name">Robert M.</div><div class="t-meta">Private Lesson Package</div></div>
         </div>
       </div>
-
-      <div class="t-card reveal reveal-delay-1">
-        <div class="t-stars" aria-label="5 stars">★★★★★</div>
+      <div class="t-card reveal d1">
+        <div class="t-stars">★★★★★</div>
         <p class="t-quote">"The instructor picks up quickly on what you're doing wrong and gives easy, minimal tips to fix it. He doesn't change your whole swing — he refines what you already have. I gained so much distance."</p>
         <div class="t-author">
           <div class="t-avatar" aria-hidden="true">J</div>
-          <div>
-            <div class="t-name">Javier L.</div>
-            <div class="t-meta">Private Lessons</div>
-          </div>
+          <div><div class="t-name">Javier L.</div><div class="t-meta">Private Lessons</div></div>
         </div>
       </div>
-
-      <div class="t-card reveal reveal-delay-2">
-        <div class="t-stars" aria-label="5 stars">★★★★★</div>
+      <div class="t-card reveal d2">
+        <div class="t-stars">★★★★★</div>
         <p class="t-quote">"Went in for a fitting — staff was very professional and made me feel comfortable. They captured data on every shaft and club head. Highly recommend."</p>
         <div class="t-author">
           <div class="t-avatar" aria-hidden="true">A</div>
-          <div>
-            <div class="t-name">Ana G.</div>
-            <div class="t-meta">Full Bag Fitting</div>
-          </div>
+          <div><div class="t-name">Ana G.</div><div class="t-meta">Full Bag Fitting</div></div>
         </div>
       </div>
-
       <div class="t-card reveal">
-        <div class="t-stars" aria-label="5 stars">★★★★★</div>
+        <div class="t-stars">★★★★★</div>
         <p class="t-quote">"My son Jaxon loves working with both Coach Yaser and Coach Memo. They are wonderful at working with kids. He has learned so much in such a short time."</p>
         <div class="t-author">
           <div class="t-avatar" aria-hidden="true">K</div>
-          <div>
-            <div class="t-name">Karen S.</div>
-            <div class="t-meta">Junior Lessons</div>
-          </div>
+          <div><div class="t-name">Karen S.</div><div class="t-meta">Junior Lessons</div></div>
         </div>
       </div>
-
-      <div class="t-card reveal reveal-delay-1">
-        <div class="t-stars" aria-label="5 stars">★★★★★</div>
+      <div class="t-card reveal d1">
+        <div class="t-stars">★★★★★</div>
         <p class="t-quote">"I made a huge improvement in my swing in just one lesson. Memo is helpful, patient, and a miracle worker. Now I have signed my daughter up for a lesson too."</p>
         <div class="t-author">
           <div class="t-avatar" aria-hidden="true">D</div>
-          <div>
-            <div class="t-name">Diana C.</div>
-            <div class="t-meta">Private Lesson</div>
-          </div>
+          <div><div class="t-name">Diana C.</div><div class="t-meta">Private Lesson</div></div>
         </div>
       </div>
-
-      <div class="t-card reveal reveal-delay-2">
-        <div class="t-stars" aria-label="5 stars">★★★★★</div>
+      <div class="t-card reveal d2">
+        <div class="t-stars">★★★★★</div>
         <p class="t-quote">"Great atmosphere and great coaches. Took my little nephew and we had great guidance and patience from Coach Guillermo. Would definitely recommend!"</p>
         <div class="t-author">
           <div class="t-avatar" aria-hidden="true">M</div>
-          <div>
-            <div class="t-name">Marco A.</div>
-            <div class="t-meta">Junior Lesson</div>
-          </div>
+          <div><div class="t-name">Marco A.</div><div class="t-meta">Junior Lesson</div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ─── BOOKING / CONTACT ─── -->
+  <!-- BOOKING -->
   <section id="book" aria-labelledby="book-heading">
-    <div class="reveal">
-      <div class="section-label">Book a Session</div>
-      <h2 id="book-heading" class="section-heading">Ready to lower<br/>your score?</h2>
-      <p class="section-sub">
-        Book directly through our online scheduler, give us a call, or send an email. Walk-ins are always welcome when a coach is available.
-      </p>
-      <div class="contact-list">
-        <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true">📞</div>
-          <div>
-            <div class="contact-label">Phone</div>
-            <div class="contact-value">
-              <a href="tel:+19154493613">(915) 449-3613</a>
+    <div class="book-inner">
+      <div class="book-left reveal">
+        <span class="s-label">Book a Session</span>
+        <h2 id="book-heading" class="s-heading">Ready to lower<br/>your score?</h2>
+        <p class="s-sub">Book directly through our online scheduler, give us a call, or send an email. Walk-ins are always welcome when a coach is available.</p>
+        <div class="contacts">
+          <div class="contact-row">
+            <div class="contact-icon" aria-hidden="true">📞</div>
+            <div>
+              <div class="contact-label">Phone</div>
+              <div class="contact-val"><a href="tel:+19154493613">(915) 449-3613</a></div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon" aria-hidden="true">✉️</div>
+            <div>
+              <div class="contact-label">Email</div>
+              <div class="contact-val"><a href="mailto:perfectswing4u@gmail.com">perfectswing4u@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-icon" aria-hidden="true">📍</div>
+            <div>
+              <div class="contact-label">Location</div>
+              <div class="contact-val">
+                <a href="https://maps.google.com/?q=5864+N+Mesa+St+Suite+A+El+Paso+TX+79912" target="_blank" rel="noopener">
+                  5864 N Mesa St, Suite A<br/>El Paso, TX 79912
+                </a>
+              </div>
             </div>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true">✉️</div>
-          <div>
-            <div class="contact-label">Email</div>
-            <div class="contact-value">
-              <a href="mailto:perfectswing4u@gmail.com">perfectswing4u@gmail.com</a>
-            </div>
-          </div>
-        </div>
-        <div class="contact-item">
-          <div class="contact-icon" aria-hidden="true">📍</div>
-          <div>
-            <div class="contact-label">Location</div>
-            <div class="contact-value">
-              <a href="https://maps.google.com/?q=5864+N+Mesa+St+Suite+A+El+Paso+TX+79912" target="_blank" rel="noopener">
-                5864 N Mesa St, Suite A<br/>El Paso, TX 79912
-              </a>
-            </div>
-          </div>
-        </div>
+        <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=book-cta" target="_blank" rel="noopener" class="book-cta">Book Your Lesson Online →</a>
       </div>
-      <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=book-cta&utm_campaign=footer" target="_blank" rel="noopener" class="book-btn">
-        Book Your Lesson Online →
-      </a>
-    </div>
-
-    <div class="book-right reveal reveal-delay-2">
-      <div class="hours-title">Studio Hours</div>
-      <div class="hours-list">
-        <div class="hours-row">
-          <span class="hours-day">Monday</span>
-          <span class="hours-time">10:00 AM – 6:00 PM</span>
+      <div class="book-right reveal d2">
+        <div class="hours-title">Studio Hours</div>
+        <div class="hours">
+          <div class="hr"><span class="hr-day">Monday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+          <div class="hr"><span class="hr-day">Tuesday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+          <div class="hr"><span class="hr-day">Wednesday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+          <div class="hr"><span class="hr-day">Thursday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+          <div class="hr"><span class="hr-day">Friday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+          <div class="hr closed"><span class="hr-day">Saturday</span><span class="hr-time">Closed</span></div>
+          <div class="hr closed"><span class="hr-day">Sunday</span><span class="hr-time">Closed</span></div>
         </div>
-        <div class="hours-row">
-          <span class="hours-day">Tuesday</span>
-          <span class="hours-time">10:00 AM – 6:00 PM</span>
+        <div class="hours-divider"></div>
+        <div class="follow-label">Follow us for tips, drills &amp; updates</div>
+        <div class="socials">
+          <a href="https://www.instagram.com/perfectswing4u/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/perfectswingg4u/" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="https://perfectswing4u.square.site/" target="_blank" rel="noopener" class="social-btn" aria-label="Book Online">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </a>
         </div>
-        <div class="hours-row">
-          <span class="hours-day">Wednesday</span>
-          <span class="hours-time">10:00 AM – 6:00 PM</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Thursday</span>
-          <span class="hours-time">10:00 AM – 6:00 PM</span>
-        </div>
-        <div class="hours-row">
-          <span class="hours-day">Friday</span>
-          <span class="hours-time">10:00 AM – 6:00 PM</span>
-        </div>
-        <div class="hours-row closed">
-          <span class="hours-day">Saturday</span>
-          <span class="hours-time">Closed</span>
-        </div>
-        <div class="hours-row closed">
-          <span class="hours-day">Sunday</span>
-          <span class="hours-time">Closed</span>
-        </div>
-      </div>
-      <div class="hours-divider"></div>
-      <div class="follow-label">Follow us for tips, drills &amp; updates</div>
-      <div class="social-row">
-        <a href="https://www.instagram.com/perfectswing4u/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-        </a>
-        <a href="https://www.facebook.com/perfectswingg4u/" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-        </a>
-        <a href="https://perfectswing4u.square.site/" target="_blank" rel="noopener" class="social-btn" aria-label="Book Online">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- ─── FOOTER ─── -->
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-left">
-      <svg width="28" height="28" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="opacity:0.35">
-        <path d="M8 32 C4 26 3 18 6 11 C9 5 15 2 22 3" stroke="white" stroke-width="1.5" stroke-linecap="round" fill="none"/>
-        <circle cx="21" cy="8" r="2.8" fill="white"/>
-        <path d="M21 11 C18.5 12.5 17 15 16.5 18 L15.5 23 L20 21 L21 27 L22 21 L26 23 L25 18 C24.5 15 23.5 12.5 21 11Z" fill="white"/>
-        <path d="M26 23 L30 14" stroke="white" stroke-width="1.3" stroke-linecap="round"/>
-      </svg>
+    <div class="footer-brand">
+      <img class="footer-logo" src="public/images/logo.webp" alt="" aria-hidden="true" width="26" height="26" />
       <span class="footer-copy">© 2025 Perfect Swing for You Golf Academy · El Paso, TX</span>
     </div>
     <ul class="footer-nav">
@@ -1755,67 +1725,99 @@
   </footer>
 
   <script>
-    // ── Scroll nav ──────────────────────────────────────
-    const nav = document.getElementById('main-nav');
+    /* ── CUSTOM CURSOR ─────────────────────────────────── */
+    const dot  = document.getElementById('c-dot');
+    const ring = document.getElementById('c-ring');
+    let rx = 0, ry = 0, mx = 0, my = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left  = mx + 'px';
+      dot.style.top   = my + 'px';
+    });
+
+    (function lerp() {
+      rx += (mx - rx) * 0.11;
+      ry += (my - ry) * 0.11;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(lerp);
+    })();
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+      el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+    });
+
+    /* Switch cursor color on dark sections */
+    const darkSections = document.querySelectorAll('#hero, #about, #technology, #book, footer');
+    const cursorIO = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting && e.intersectionRatio > 0.4) {
+          document.body.classList.add('cursor-dark');
+        } else {
+          const anyDark = [...darkSections].some(s => {
+            const r = s.getBoundingClientRect();
+            return r.top < window.innerHeight * 0.5 && r.bottom > window.innerHeight * 0.5;
+          });
+          if (!anyDark) document.body.classList.remove('cursor-dark');
+        }
+      });
+    }, { threshold: [0, 0.4] });
+    darkSections.forEach(s => cursorIO.observe(s));
+
+    /* ── SCROLL NAV ────────────────────────────────────── */
+    const nav = document.getElementById('nav');
+    let lastScroll = 0;
     window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 60);
+      const y = window.scrollY;
+      nav.classList.toggle('scrolled', y > 60);
+      lastScroll = y;
     }, { passive: true });
 
-    // ── Hamburger / mobile drawer ───────────────────────
-    const hamburger = document.getElementById('hamburger');
-    const drawer = document.getElementById('nav-drawer');
+    /* ── MOBILE MENU ───────────────────────────────────── */
+    const burger = document.getElementById('hamburger');
+    const drawer = document.getElementById('drawer');
     const drawerLinks = drawer.querySelectorAll('a');
 
-    function openDrawer() {
-      hamburger.classList.add('open');
-      hamburger.setAttribute('aria-expanded', 'true');
+    function openMenu() {
+      burger.classList.add('open');
+      burger.setAttribute('aria-expanded', 'true');
       drawer.classList.add('open');
       drawer.setAttribute('aria-hidden', 'false');
       document.body.style.overflow = 'hidden';
     }
-
-    function closeDrawer() {
-      hamburger.classList.remove('open');
-      hamburger.setAttribute('aria-expanded', 'false');
+    function closeMenu() {
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
       drawer.classList.remove('open');
       drawer.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = '';
     }
+    burger.addEventListener('click', () => drawer.classList.contains('open') ? closeMenu() : openMenu());
+    drawerLinks.forEach(l => l.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
 
-    hamburger.addEventListener('click', () => {
-      drawer.classList.contains('open') ? closeDrawer() : openDrawer();
-    });
-
-    drawerLinks.forEach(link => link.addEventListener('click', closeDrawer));
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
-    });
-
-    // ── Scroll reveal ───────────────────────────────────
-    const revealEls = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver((entries) => {
+    /* ── SCROLL REVEAL ─────────────────────────────────── */
+    const reveals = document.querySelectorAll('.reveal');
+    const revealIO = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
+        if (e.isIntersecting) { e.target.classList.add('on'); revealIO.unobserve(e.target); }
       });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => io.observe(el));
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => revealIO.observe(el));
 
-    // Hero fires on load (already in viewport)
     setTimeout(() => {
-      document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('visible'));
-    }, 150);
+      document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('on'));
+    }, 120);
 
-    // ── Smooth scroll for anchor links ──────────────────
+    /* ── ANCHOR SMOOTH SCROLL ──────────────────────────── */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', e => {
         const target = document.querySelector(a.getAttribute('href'));
         if (!target) return;
         e.preventDefault();
-        const offset = nav.getBoundingClientRect().height + 16;
+        const offset = nav.getBoundingClientRect().height + 12;
         window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
       });
     });
