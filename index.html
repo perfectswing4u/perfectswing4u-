@@ -16,6 +16,15 @@
   <meta property="og:title" content="Perfect Swing for You | Indoor Golf Academy – El Paso, TX" />
   <meta property="og:description" content="PGA-certified instruction, launch monitor technology, and custom club fitting — all indoors. Book with Coach Yaser or Coach Memo." />
   <meta property="og:url" content="https://perfectswing4u.com/" />
+  <meta property="og:site_name" content="Perfect Swing for You" />
+  <meta property="og:image" content="https://perfectswing4u.com/public/images/og-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Perfect Swing for You — El Paso's indoor golf academy" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Perfect Swing for You | Indoor Golf Academy – El Paso, TX" />
+  <meta name="twitter:description" content="PGA-certified instruction, launch monitor technology, and custom club fitting — all indoors. Book with Coach Yaser or Coach Memo." />
+  <meta name="twitter:image" content="https://perfectswing4u.com/public/images/og-card.jpg" />
 
   <script type="application/ld+json">
   {
@@ -341,6 +350,38 @@
       transition: border-color 0.2s;
     }
     .btn-outline:hover .btn-circle { border-color: rgba(255,255,255,0.7); }
+
+    /* Sticky mobile "Book a Lesson" CTA — hidden on desktop, shown on mobile */
+    .sticky-book {
+      display: none;
+      position: fixed;
+      left: 50%;
+      bottom: 1rem;
+      transform: translateX(-50%) translateY(140%);
+      z-index: 480;
+      align-items: center;
+      gap: 0.55rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--forest);
+      padding: 0.95rem 1.8rem;
+      border-radius: 2rem;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.28);
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.35s var(--ease), opacity 0.35s var(--ease);
+    }
+    .sticky-book svg { width: 16px; height: 16px; stroke: var(--lime); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .sticky-book.show { transform: translateX(-50%) translateY(0); opacity: 1; pointer-events: auto; }
+    /* Don't overlap the open mobile menu */
+    body:has(.drawer.open) .sticky-book { opacity: 0; pointer-events: none; transform: translateX(-50%) translateY(140%); }
+    @media (prefers-reduced-motion: reduce) {
+      .sticky-book { transition: opacity 0.2s linear; transform: translateX(-50%) translateY(0); }
+    }
 
     /* Floating stat pills (hero, desktop) */
     .hero-pills {
@@ -1634,6 +1675,7 @@
       .hero-actions { gap: 0.9rem; }
       .btn-solid { font-size: 0.78rem; padding: 0.9rem 2rem; }
       #brands { padding: 3rem 1.25rem; }
+      .sticky-book { display: inline-flex; }
       /* MARQUEE */
       .marquee { padding: 0.7rem 0; }
       .marquee-item { font-size: 0.72rem; padding: 0 1.4rem; }
@@ -1826,6 +1868,12 @@
       <span></span><span></span><span></span>
     </button>
   </nav>
+
+  <!-- STICKY MOBILE CTA -->
+  <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=sticky-mobile" target="_blank" rel="noopener" class="sticky-book" id="sticky-book">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Book a Lesson
+  </a>
 
   <!-- HERO -->
   <section id="hero" aria-label="Hero">
@@ -2680,6 +2728,16 @@
         rt = setTimeout(() => { if (ready) { sizeCanvas(); current = -1; render(); } }, 150);
       });
     })();
+
+    /* ── STICKY MOBILE BOOK CTA (show after hero) ──────── */
+    const stickyBook = document.getElementById('sticky-book');
+    const heroEl = document.getElementById('hero');
+    if (stickyBook && heroEl) {
+      const bookIO = new IntersectionObserver(([e]) => {
+        stickyBook.classList.toggle('show', !e.isIntersecting);
+      }, { threshold: 0, rootMargin: '-40% 0px 0px 0px' });
+      bookIO.observe(heroEl);
+    }
 
     /* ── ANCHOR SMOOTH SCROLL ──────────────────────────── */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
