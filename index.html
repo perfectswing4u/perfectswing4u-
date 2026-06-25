@@ -1244,6 +1244,69 @@
     .t-card.featured .t-name { color: var(--white); }
     .t-meta { font-size: 0.7rem; color: var(--muted); }
     .t-card.featured .t-meta { color: rgba(255,255,255,0.44); }
+    .t-google-bar {
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.4rem 1.8rem;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .t-google-left {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .t-google-icon {
+      width: 32px; height: 32px; flex-shrink: 0;
+    }
+    .t-google-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+    }
+    .t-google-stars {
+      color: #FBBC04;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      margin-top: 0.15rem;
+    }
+    .t-google-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .t-google-see {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: color 0.2s;
+    }
+    .t-google-see:hover { color: var(--text); }
+    .t-google-write {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--forest);
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      transition: opacity 0.2s;
+    }
+    .t-google-write:hover { opacity: 0.85; }
 
     /* ── INSTAGRAM ── */
     #instagram {
@@ -1775,6 +1838,9 @@
       .t-grid { grid-template-columns: 1fr; gap: 0.9rem; }
       .t-card { padding: 1.5rem; }
       .t-quote { font-size: 0.95rem; line-height: 1.6; }
+      .t-google-bar { flex-direction: column; align-items: flex-start; gap: 1rem; padding: 1.2rem 1.4rem; }
+      .t-google-actions { width: 100%; }
+      .t-google-write { flex: 1; text-align: center; }
 
       /* INSTAGRAM */
       #instagram { padding: 3.5rem 1.25rem; }
@@ -2310,7 +2376,8 @@
         <span class="s-label">Student Reviews</span>
         <h2 id="reviews-heading" class="s-heading">What golfers<br/>are saying.</h2>
       </div>
-      <a href="https://www.facebook.com/perfectswingg4u/" target="_blank" rel="noopener" class="all-reviews reveal">Read all reviews →</a>
+      <!-- Replace GOOGLE_PLACE_ID with your Place ID from Google Maps (search the business → copy place_id= from URL) -->
+      <a href="https://www.google.com/maps/search/?api=1&query=Perfect+Swing+4U+Golf+Academy+El+Paso+TX" target="_blank" rel="noopener" class="all-reviews reveal">See Google reviews →</a>
     </div>
     <div class="t-grid">
       <div class="t-card featured reveal">
@@ -2360,6 +2427,29 @@
           <div class="t-avatar" aria-hidden="true">M</div>
           <div><div class="t-name">Marco A.</div><div class="t-meta">Junior Lesson</div></div>
         </div>
+      </div>
+    </div>
+
+    <!-- Google reviews bar -->
+    <!-- To use direct links: replace the two href URLs below with https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID and https://www.google.com/maps/place/?q=place_id:YOUR_PLACE_ID -->
+    <div class="t-google-bar reveal">
+      <div class="t-google-left">
+        <!-- Google "G" icon -->
+        <svg class="t-google-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          <path fill="none" d="M0 0h48v48H0z"/>
+        </svg>
+        <div>
+          <div class="t-google-label">Google Reviews</div>
+          <div class="t-google-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="t-google-actions">
+        <a href="https://www.google.com/maps/search/?api=1&query=Perfect+Swing+4U+Golf+Academy+El+Paso+TX" target="_blank" rel="noopener" class="t-google-see">See all reviews →</a>
+        <a href="https://www.google.com/maps/search/?api=1&query=Perfect+Swing+4U+Golf+Academy+El+Paso+TX" target="_blank" rel="noopener" class="t-google-write">Leave a Review</a>
       </div>
     </div>
   </section>
