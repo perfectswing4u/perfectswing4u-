@@ -996,6 +996,39 @@
       line-height: 1.65;
     }
 
+    /* ── BRANDS ── */
+    #brands {
+      background: var(--off);
+      padding: 4rem 5rem;
+      text-align: center;
+    }
+    .brands-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .brands-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+    .brand-chip {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.65rem 1.4rem;
+      white-space: nowrap;
+    }
+
     /* ── COACHES ── */
     #coaches {
       background: var(--white);
@@ -1600,6 +1633,7 @@
       .hero-sub { font-size: 0.93rem; margin-bottom: 2rem; max-width: 100%; }
       .hero-actions { gap: 0.9rem; }
       .btn-solid { font-size: 0.78rem; padding: 0.9rem 2rem; }
+      #brands { padding: 3rem 1.25rem; }
       /* MARQUEE */
       .marquee { padding: 0.7rem 0; }
       .marquee-item { font-size: 0.72rem; padding: 0 1.4rem; }
@@ -2140,6 +2174,20 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- BRANDS -->
+  <section id="brands" aria-label="Equipment brands we carry">
+    <div class="brands-label reveal">Equipment We Carry</div>
+    <div class="brands-row">
+      <span class="brand-chip reveal">FootJoy</span>
+      <span class="brand-chip reveal d1">Titleist</span>
+      <span class="brand-chip reveal d2">PXG</span>
+      <span class="brand-chip reveal">Mizuno</span>
+      <span class="brand-chip reveal d1">Cleveland</span>
+      <span class="brand-chip reveal d2">Srixon</span>
+      <span class="brand-chip reveal">Capto Golf</span>
     </div>
   </section>
 
