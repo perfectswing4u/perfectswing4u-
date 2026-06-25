@@ -1178,6 +1178,122 @@
     .ig-setup-body { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
     .ig-setup-body a { color: var(--forest); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
 
+    /* ── FAQ ── */
+    #faq {
+      background: var(--off);
+      padding: 7rem 5rem;
+      border-top: 1px solid var(--line);
+    }
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .faq-left { position: sticky; top: 7rem; }
+    .faq-left .s-sub { margin-top: 1.2rem; max-width: 30ch; }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .faq-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+    .faq-item[open] {
+      border-color: var(--text);
+      box-shadow: 0 12px 40px -24px rgba(0,0,0,0.35);
+    }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.35rem 1.6rem;
+      font-size: 1.02rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-chev {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      position: relative;
+      transition: transform 0.3s var(--ease);
+    }
+    .faq-chev::before,
+    .faq-chev::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 11px; height: 1.6px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+    }
+    .faq-chev::before { transform: translate(-50%,-50%); }
+    .faq-chev::after  { transform: translate(-50%,-50%) rotate(90deg); }
+    .faq-item[open] .faq-chev::after { opacity: 0; transform: translate(-50%,-50%) rotate(0deg); }
+    .faq-answer-wrap {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.35s var(--ease);
+    }
+    .faq-item[open] .faq-answer-wrap { grid-template-rows: 1fr; }
+    .faq-answer {
+      overflow: hidden;
+    }
+    .faq-answer p {
+      padding: 0 1.6rem 1.5rem;
+      margin: 0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .faq-answer a { color: var(--forest); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── CREDENTIALS BAR ── */
+    .creds {
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+    .creds-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.4rem;
+    }
+    .creds-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.7rem;
+    }
+    .cred-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.6rem 1.15rem;
+      white-space: nowrap;
+    }
+    .cred-chip svg { width: 14px; height: 14px; flex-shrink: 0; stroke: var(--green); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
     /* ── CTA / BOOKING (Golfair dark section influence) ── */
     #book {
       background: var(--black);
@@ -1308,6 +1424,25 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── BOOKING MAP ── */
+    .book-map {
+      position: relative;
+      margin-top: 4rem;
+      border-radius: 1.2rem;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+      aspect-ratio: 16 / 6;
+      background: rgba(255,255,255,0.04);
+    }
+    .book-map iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(0.35) contrast(1.05);
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -1523,9 +1658,21 @@
       .ig-placeholder .ig-card:nth-child(n+5) { display: none; }
       .ig-setup { flex-direction: column; gap: 1rem; }
 
+      /* FAQ */
+      #faq { padding: 3.5rem 1.25rem; }
+      .faq-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .faq-left { position: static; top: auto; }
+      .faq-left .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .faq-left .s-sub { max-width: none; }
+      .faq-item summary { padding: 1.15rem 1.25rem; font-size: 0.95rem; gap: 1rem; }
+      .faq-answer p { padding: 0 1.25rem 1.25rem; }
+      .creds { margin-top: 2.8rem; padding-top: 2.2rem; }
+      .cred-chip { font-size: 0.74rem; padding: 0.5rem 0.9rem; }
+
       /* BOOKING */
       #book { padding: 3.5rem 1.25rem; }
       .book-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .book-map { margin-top: 2.5rem; aspect-ratio: 4 / 3; }
       .book-left .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
       .book-left .s-sub { margin-bottom: 2rem; }
       .book-cta {
@@ -1572,6 +1719,7 @@
     <a href="#services">Services</a>
     <a href="#coaches">Coaches</a>
     <a href="#testimonials">Reviews</a>
+    <a href="#faq">FAQ</a>
     <a href="#book">Contact</a>
     <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=mobile-menu" target="_blank" rel="noopener" class="d-cta">Book a Lesson</a>
   </div>
@@ -1587,6 +1735,7 @@
       <li><a href="#services">Services</a></li>
       <li><a href="#coaches">Coaches</a></li>
       <li><a href="#testimonials">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#instagram">Instagram</a></li>
       <li><a href="#book">Contact</a></li>
       <li>
@@ -2125,6 +2274,58 @@
     </div>
   </section>
 
+  <!-- FAQ -->
+  <section id="faq" aria-labelledby="faq-heading">
+    <div class="faq-inner">
+      <div class="faq-left reveal">
+        <span class="s-label">Questions</span>
+        <h2 id="faq-heading" class="s-heading">Good to<br/>know.</h2>
+        <p class="s-sub">Everything you need before your first session. Still wondering about something? Just give us a call.</p>
+      </div>
+      <div class="faq-list reveal d1">
+        <details class="faq-item">
+          <summary>Do I need my own clubs?<span class="faq-chev" aria-hidden="true"></span></summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Not at all. We have clubs on hand so you can show up empty-handed and start swinging. That said, if you have your own set, bring it — practicing with the clubs you actually play makes your lesson data and adjustments far more useful.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary>How long is a lesson?<span class="faq-chev" aria-hidden="true"></span></summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Private, junior, and high-school lessons run a full 60 minutes. Putting sessions in our bundle are 30 minutes. Every minute is one-on-one with your coach — there's no shared range time or waiting on a tee.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary>I'm a complete beginner — is this for me?<span class="faq-chev" aria-hidden="true"></span></summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Absolutely. We coach every skill level, from first-time beginners who've never held a club to competitive high-school athletes. Your coach meets you exactly where you are and builds from there — no judgment, no assumptions.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary>Is it really fully indoor? What about the El Paso heat or wind?<span class="faq-chev" aria-hidden="true"></span></summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Yes — we're 100% indoor and climate-controlled year-round. No heat, no wind, no rain delays, and no tee times to chase. You get consistent conditions every visit, which is exactly what makes measurable improvement possible.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary>What ages do you teach? Do you have junior programs?<span class="faq-chev" aria-hidden="true"></span></summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>We work with juniors through adults. There are dedicated Junior and High School lesson programs built around patient, structured instruction for young golfers — many families book lessons for both a parent and their kids.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary>What technology do you use during a lesson?<span class="faq-chev" aria-hidden="true"></span></summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Every session is backed by launch-monitor data (ball speed, spin, launch angle, carry) and multi-angle video analysis. We also offer Capto putting analysis and TPI fitness assessment. You don't just feel the change — you see it in the numbers.</p></div></div>
+        </details>
+        <details class="faq-item">
+          <summary>How do I book, and what if I need to reschedule?<span class="faq-chev" aria-hidden="true"></span></summary>
+          <div class="faq-answer-wrap"><div class="faq-answer"><p>Book anytime through our <a href="https://perfectswing4u.square.site/?utm_source=website&utm_medium=faq" target="_blank" rel="noopener">online scheduler</a>, or call <a href="tel:+19154493613">(915) 449-3613</a>. Walk-ins are welcome whenever a coach is free. Need to move a session? Just give us a call or message and we'll find a new time.</p></div></div>
+        </details>
+      </div>
+    </div>
+
+    <div class="creds reveal">
+      <div class="creds-label">Coached by certified professionals</div>
+      <div class="creds-row">
+        <span class="cred-chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>PGA Certified</span>
+        <span class="cred-chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Capto Putting Certified</span>
+        <span class="cred-chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>TPI Level 2</span>
+        <span class="cred-chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Launch Monitor Data</span>
+        <span class="cred-chip"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Multi-Angle Video</span>
+      </div>
+    </div>
+  </section>
+
   <!-- BOOKING -->
   <section id="book" aria-labelledby="book-heading">
     <div class="book-inner">
@@ -2187,6 +2388,14 @@
         </div>
       </div>
     </div>
+    <div class="book-map reveal">
+      <iframe
+        src="https://www.google.com/maps?q=5864+N+Mesa+St+Suite+A+El+Paso+TX+79912&output=embed"
+        title="Perfect Swing for You — 5864 N Mesa St, Suite A, El Paso, TX 79912"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen></iframe>
+    </div>
   </section>
 
   <!-- FOOTER -->
@@ -2199,6 +2408,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#coaches">Coaches</a></li>
+      <li><a href="#faq">FAQ</a></li>
       <li><a href="#book">Contact</a></li>
       <li><a href="https://perfectswing4u.square.site/" target="_blank" rel="noopener">Book Online</a></li>
     </ul>
@@ -2290,6 +2500,16 @@
     setTimeout(() => {
       document.querySelectorAll('#hero .reveal').forEach(el => el.classList.add('on'));
     }, 120);
+
+    /* ── FAQ ACCORDION (single-open; progressive enhancement) ── */
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.addEventListener('toggle', () => {
+        if (item.open) {
+          faqItems.forEach(other => { if (other !== item) other.open = false; });
+        }
+      });
+    });
 
     /* ── ANCHOR SMOOTH SCROLL ──────────────────────────── */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
