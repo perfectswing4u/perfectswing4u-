@@ -1265,6 +1265,13 @@
     }
     .footer-nav a:hover { color: rgba(255,255,255,0.6); }
 
+    /* Scroll hint — desktop hidden, shown only in mobile media query */
+    .hero-scroll-hint { display: none; }
+
+    /* Responsive line breaks */
+    .mobile-br { display: none; }
+    @media (max-width: 520px) { .mobile-br { display: block; } }
+
     /* ── REVEAL ── */
     .reveal {
       opacity: 0;
@@ -1287,56 +1294,177 @@
     }
 
     @media (max-width: 900px) {
-      nav { padding: 1.1rem 1.5rem; }
-      nav.scrolled { padding: 0.85rem 1.5rem; }
+      /* NAV */
+      nav { padding: 1rem 1.25rem; }
+      nav.scrolled { padding: 0.75rem 1.25rem; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
+      .nav-logo-text { font-size: 0.95rem; }
 
-      h1 { font-size: 2.8rem; }
+      /* HERO — 88svh so marquee peeks below fold, text anchored bottom */
+      #hero {
+        height: 88svh;
+        min-height: 520px;
+        align-items: flex-end;
+      }
+      h1 { font-size: clamp(2.4rem, 9vw, 3rem); letter-spacing: -0.03em; }
       .hero-pills { display: none; }
-      .hero-content { padding: 0 1.5rem 4.5rem; }
+      .hero-content {
+        padding: 0 1.25rem 3rem;
+        max-width: 100%;
+      }
+      .hero-eyebrow {
+        font-size: 0.76rem; letter-spacing: 0.08em;
+        margin-bottom: 1rem;
+      }
+      .hero-sub { font-size: 0.93rem; margin-bottom: 2rem; max-width: 100%; }
+      .hero-actions { gap: 0.9rem; }
+      .btn-solid { font-size: 0.78rem; padding: 0.9rem 2rem; }
+      .hero-scroll-hint { display: flex; }
+      /* Scroll nudge: animated chevron at hero bottom-centre */
+      .hero-scroll-hint {
+        position: absolute;
+        bottom: 1.1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        opacity: 0.45;
+        animation: nudge 2s ease-in-out infinite;
+      }
+      .hero-scroll-hint span {
+        display: block;
+        width: 18px; height: 1px;
+        background: var(--white);
+        transform-origin: center;
+      }
+      .hero-scroll-hint span:first-child  { transform: rotate(40deg) translateX(4px); }
+      .hero-scroll-hint span:last-child   { transform: rotate(-40deg) translateX(-4px); }
+      @keyframes nudge {
+        0%,100% { transform: translateX(-50%) translateY(0); opacity: 0.45; }
+        50%      { transform: translateX(-50%) translateY(5px); opacity: 0.25; }
+      }
 
-      #impact { padding: 5rem 1.5rem; }
-      .impact-cards { grid-template-columns: 1fr; max-width: 460px; }
+      /* MARQUEE */
+      .marquee { padding: 0.7rem 0; }
+      .marquee-item { font-size: 0.72rem; padding: 0 1.4rem; }
+
+      /* IMPACT */
+      #impact { padding: 3.5rem 1.25rem 4rem; }
+      .impact-intro { margin-bottom: 2.5rem; }
+      .impact-intro .s-heading { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+      .impact-intro p { font-size: 0.88rem; }
+      .impact-cards { grid-template-columns: 1fr; max-width: 100%; gap: 0.9rem; }
       .ic.chart { grid-column: auto; }
-      .ic-bignum { margin-top: 1.4rem; }
+      .ic-bignum { font-size: 3rem; margin-top: 1rem; }
+      .ic-chart-num { font-size: 2.2rem; }
 
+      /* ABOUT — photo banner on top, text below */
       #about { grid-template-columns: 1fr; }
-      .about-left { padding: 5rem 1.5rem; }
-      .about-right { min-height: 300px; }
-      .about-card { left: 1rem; bottom: 1rem; }
+      .about-right {
+        min-height: 0;
+        height: 220px;        /* fixed banner height */
+        order: -1;
+        overflow: hidden;
+      }
+      .about-photo {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+      }
+      .about-card { display: none; }
+      .about-left { padding: 2.5rem 1.25rem 3rem; }
+      .about-left .s-heading { font-size: clamp(2rem, 8vw, 2.6rem); }
+      .about-features { margin-top: 1.6rem; gap: 0.85rem; }
+      .about-feat { font-size: 0.85rem; }
 
-      #process { padding: 5rem 1.5rem; }
-      .process-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
-      .process-steps { grid-template-columns: 1fr; gap: 2.5rem; }
+      /* PROCESS */
+      #process { padding: 3rem 1.25rem 3.5rem; }
+      .process-header { grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 2rem; }
+      .process-header .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .process-steps { grid-template-columns: 1fr; gap: 1.75rem; }
 
-      #services { padding: 5rem 1.5rem; }
-      .services-header { grid-template-columns: 1fr; gap: 1.5rem; }
-      .services-grid { grid-template-columns: 1fr; }
-      .svc.wide { grid-column: span 1; grid-template-columns: 1fr; }
+      /* SERVICES */
+      #services { padding: 3rem 1.25rem 3.5rem; }
+      .services-header { grid-template-columns: 1fr; gap: 0.6rem; margin-bottom: 2rem; }
+      .services-header .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .services-grid { grid-template-columns: 1fr; gap: 0.9rem; }
+      .svc { padding: 1.6rem; }
+      .svc-icon { width: 38px; height: 38px; margin-bottom: 1rem; }
+      .svc-title { font-size: 1.15rem; }
+      .svc-price { font-size: 1.7rem; }
+      .svc.wide { grid-column: span 1; grid-template-columns: 1fr; gap: 1rem; padding: 1.6rem; }
       .bundle-right { text-align: left; }
+      .svc.wide .svc-price { font-size: 2.2rem; }
 
-      #technology { padding: 5rem 1.5rem; }
-      .tech-inner { grid-template-columns: 1fr; gap: 3rem; }
+      /* TECHNOLOGY */
+      #technology { padding: 3.5rem 1.25rem; }
+      .tech-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .tech-left .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .tech-metrics { gap: 1rem; }
+      .tech-met-num { font-size: 2.4rem; }
+      .tech-features { gap: 0.75rem; }
+      .tech-feat { padding: 1.1rem 1.2rem; gap: 0.9rem; }
 
-      #coaches { padding: 5rem 1.5rem; }
-      .coaches-intro { grid-template-columns: 1fr; gap: 1.5rem; }
-      .coaches-grid { grid-template-columns: 1fr; }
-      .coach-photo-wrap { height: 320px; }
+      /* COACHES */
+      #coaches { padding: 3.5rem 1.25rem; }
+      .coaches-intro { grid-template-columns: 1fr; gap: 1rem; margin-bottom: 2.5rem; }
+      .coaches-intro .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .coaches-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      /* Photo: 4:3 aspect, object-fit fills from face down */
+      .coach-photo-wrap {
+        height: 0;
+        padding-bottom: 66%;   /* 3:2 — shows shoulders + face + cap */
+        position: relative;
+        overflow: hidden;
+      }
+      .coach-photo {
+        position: absolute;
+        inset: 0;
+        width: 100%; height: 100%;
+        object-position: center 10%; /* show from cap to mid-chest */
+      }
+      .coach-body { padding: 1.4rem; }
+      .coach-name { font-size: 1.5rem; }
 
-      #testimonials { padding: 5rem 1.5rem; }
-      .t-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .t-grid { grid-template-columns: 1fr; }
+      /* TESTIMONIALS */
+      #testimonials { padding: 3.5rem 1.25rem; }
+      .t-header { flex-direction: column; align-items: flex-start; gap: 0.75rem; margin-bottom: 2rem; }
+      .t-header .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .t-grid { grid-template-columns: 1fr; gap: 0.9rem; }
+      .t-card { padding: 1.5rem; }
+      .t-quote { font-size: 0.95rem; line-height: 1.6; }
 
-      #book { padding: 5rem 1.5rem; }
-      .book-inner { grid-template-columns: 1fr; gap: 3rem; }
+      /* BOOKING */
+      #book { padding: 3.5rem 1.25rem; }
+      .book-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .book-left .s-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
+      .book-left .s-sub { margin-bottom: 2rem; }
+      .book-cta {
+        display: block;
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 0.82rem;
+        padding: 1rem 1.5rem;
+      }
+      .contacts { gap: 1rem; }
+      .book-right { padding: 1.8rem 1.5rem; }
 
-      footer { flex-direction: column; gap: 1.2rem; text-align: center; padding: 1.8rem 1.5rem; }
-      .footer-nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      /* FOOTER */
+      footer { flex-direction: column; gap: 1rem; text-align: center; padding: 1.5rem 1.25rem; }
+      .footer-nav { flex-wrap: wrap; justify-content: center; gap: 0.75rem 1.5rem; }
     }
 
-    @media (max-width: 600px) {
-      .hero-actions { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    /* Extra-small: tighten hero h1 further */
+    @media (max-width: 420px) {
+      h1 { font-size: clamp(2rem, 10vw, 2.6rem); }
+      .hero-content { padding: 5rem 1rem 3rem; }
+      #impact, #process, #services, #technology, #coaches, #testimonials, #book {
+        padding-left: 1rem; padding-right: 1rem;
+      }
+      .about-left { padding-left: 1rem; padding-right: 1rem; }
     }
 
     /* Hide custom cursor on touch devices */
@@ -1386,6 +1514,7 @@
   <!-- HERO -->
   <section id="hero" aria-label="Hero">
     <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-scroll-hint" aria-hidden="true"><span></span><span></span></div>
     <div class="hero-pills" aria-hidden="true">
       <div class="hero-pill reveal d1">
         <div class="pill-num">PGA</div>
@@ -1442,7 +1571,7 @@
   <section id="impact" aria-labelledby="impact-heading">
     <div class="impact-intro reveal">
       <span class="s-label">Our impact</span>
-      <h2 id="impact-heading" class="s-heading">Shaping a new standard in golf instruction</h2>
+      <h2 id="impact-heading" class="s-heading">Shaping a new<br/>standard in golf<br class="mobile-br"/> instruction</h2>
       <p>We give every golfer — beginner or seasoned — access to professional-grade coaching, real launch-monitor data, and custom fitting under one climate-controlled roof.</p>
     </div>
     <div class="impact-cards">
