@@ -614,6 +614,8 @@
     #about {
       background: var(--forest);
       color: var(--white);
+    }
+    .about-stage {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 0;
@@ -683,6 +685,68 @@
       margin-top: 0.25rem;
       letter-spacing: 0.03em;
       line-height: 1.4;
+    }
+    /* Scroll-scrub canvas — hidden until JS opts a capable desktop in */
+    .swing-canvas { display: none; }
+
+    /* ── ABOUT: cinematic scroll-scrub (desktop, motion-OK only) ── */
+    #about.is-scrolly {
+      height: 230vh;            /* scroll track: ~130vh of travel maps to the swing */
+      position: relative;
+    }
+    #about.is-scrolly .about-stage {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: block;           /* override the 2-col grid → full-bleed stage */
+      overflow: hidden;
+    }
+    /* Media layer fills the whole stage (no z-index → no new stacking context) */
+    #about.is-scrolly .about-right {
+      position: absolute;
+      inset: 0;
+      min-height: 0;
+    }
+    #about.is-scrolly .about-photo {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    #about.is-scrolly .swing-canvas {
+      display: block;
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+    }
+    /* Left scrim so white copy stays legible over the bright course */
+    #about.is-scrolly .about-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(90deg,
+        rgba(9,15,10,0.94) 0%,
+        rgba(9,15,10,0.78) 26%,
+        rgba(9,15,10,0.30) 50%,
+        rgba(9,15,10,0) 68%);
+    }
+    #about.is-scrolly .about-left {
+      position: absolute;
+      z-index: 2;
+      top: 0; left: 0;
+      height: 100%;
+      width: min(48%, 640px);
+      justify-content: center;
+    }
+    #about.is-scrolly .about-card {
+      z-index: 2;
+      left: auto;
+      right: 3rem;
+      bottom: 2.5rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .swing-canvas { display: none !important; }
     }
 
     /* ── PROCESS ── */
@@ -1576,7 +1640,14 @@
       .ic-chart-num { font-size: 2.2rem; }
 
       /* ABOUT — photo banner on top, text below */
-      #about { grid-template-columns: 1fr; }
+      .about-stage { grid-template-columns: 1fr; }
+      /* Safety: if viewport shrinks past the desktop guard, drop the scrub */
+      #about.is-scrolly { height: auto; }
+      #about.is-scrolly .about-stage { position: static; height: auto; display: grid; overflow: visible; }
+      #about.is-scrolly .about-stage::after { display: none; }
+      #about.is-scrolly .about-right { position: relative; }
+      #about.is-scrolly .about-left { position: static; width: auto; }
+      #about.is-scrolly .swing-canvas { display: none; }
       .about-right {
         min-height: 0;
         height: 220px;        /* fixed banner height */
@@ -1910,30 +1981,33 @@
 
   <!-- ABOUT -->
   <section id="about" aria-labelledby="about-heading">
-    <div class="about-left reveal">
-      <span class="s-label">About the Academy</span>
-      <h2 id="about-heading" class="s-heading">Where every round<br/>gets better.</h2>
-      <p class="s-sub">Perfect Swing for You is West El Paso's only fully indoor golf academy. We don't guess — we use real data to refine what you already have, giving you measurable improvement from session one.</p>
-      <div class="about-features">
-        <div class="about-feat"><div class="feat-dot"></div><span>State-of-the-art launch monitors measuring ball speed, smash factor, launch angle, and spin rate in real time</span></div>
-        <div class="about-feat"><div class="feat-dot"></div><span>Full video analysis so you see exactly what your coach sees — no ambiguity about your swing</span></div>
-        <div class="about-feat"><div class="feat-dot"></div><span>Custom club fitting matched to your actual swing data, not brand preference or budget</span></div>
-        <div class="about-feat"><div class="feat-dot"></div><span>Open year-round, climate-controlled. No tee time required, no weather delays</span></div>
-        <div class="about-feat"><div class="feat-dot"></div><span>Junior programs for all ages — first-time beginners through competitive high school players</span></div>
+    <div class="about-stage">
+      <div class="about-left reveal">
+        <span class="s-label">About the Academy</span>
+        <h2 id="about-heading" class="s-heading">Where every round<br/>gets better.</h2>
+        <p class="s-sub">Perfect Swing for You is West El Paso's only fully indoor golf academy. We don't guess — we use real data to refine what you already have, giving you measurable improvement from session one.</p>
+        <div class="about-features">
+          <div class="about-feat"><div class="feat-dot"></div><span>State-of-the-art launch monitors measuring ball speed, smash factor, launch angle, and spin rate in real time</span></div>
+          <div class="about-feat"><div class="feat-dot"></div><span>Full video analysis so you see exactly what your coach sees — no ambiguity about your swing</span></div>
+          <div class="about-feat"><div class="feat-dot"></div><span>Custom club fitting matched to your actual swing data, not brand preference or budget</span></div>
+          <div class="about-feat"><div class="feat-dot"></div><span>Open year-round, climate-controlled. No tee time required, no weather delays</span></div>
+          <div class="about-feat"><div class="feat-dot"></div><span>Junior programs for all ages — first-time beginners through competitive high school players</span></div>
+        </div>
       </div>
-    </div>
-    <div class="about-right reveal d2">
-      <img
-        class="about-photo"
-        src="https://images.unsplash.com/photo-1593111774240-d529f12cf4bb?w=900&q=85&fm=webp"
-        alt="Indoor golf lesson at Perfect Swing for You studio"
-        loading="lazy"
-        width="900"
-        height="1100"
-      />
-      <div class="about-card">
-        <div class="about-card-num">5864</div>
-        <div class="about-card-label">N Mesa St, Suite A<br/>El Paso, TX 79912</div>
+      <div class="about-right reveal d2">
+        <img
+          class="about-photo"
+          src="public/images/swing-poster.webp"
+          alt="Golfer sinking a putt on a sunlit course"
+          loading="lazy"
+          width="1100"
+          height="619"
+        />
+        <canvas class="swing-canvas" aria-hidden="true"></canvas>
+        <div class="about-card">
+          <div class="about-card-num">5864</div>
+          <div class="about-card-label">N Mesa St, Suite A<br/>El Paso, TX 79912</div>
+        </div>
       </div>
     </div>
   </section>
@@ -2510,6 +2584,80 @@
         }
       });
     });
+
+    /* ── ABOUT: scroll-scrub swing (desktop + motion-OK only) ── */
+    (function () {
+      const okDesktop = matchMedia('(min-width: 901px)').matches;
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const section = document.getElementById('about');
+      const canvas = section && section.querySelector('.swing-canvas');
+      if (!okDesktop || reduce || !canvas) return;
+
+      section.classList.add('is-scrolly');
+      const ctx = canvas.getContext('2d');
+      const FRAME_COUNT = 72;
+      const pad = n => String(n + 1).padStart(4, '0'); // files are 1-indexed
+      const frames = new Array(FRAME_COUNT);
+      let loaded = 0, current = -1, ready = false;
+
+      function sizeCanvas() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width  = Math.round(canvas.offsetWidth  * dpr);
+        canvas.height = Math.round(canvas.offsetHeight * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function draw(idx) {
+        const img = frames[idx];
+        if (!img || !img.complete || !img.naturalWidth) return;
+        const cw = canvas.offsetWidth, ch = canvas.offsetHeight;
+        const scale = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+        const sw = img.naturalWidth * scale, sh = img.naturalHeight * scale;
+        ctx.clearRect(0, 0, cw, ch);
+        ctx.drawImage(img, (cw - sw) / 2, (ch - sh) / 2, sw, sh);
+      }
+
+      function progress() {
+        const travel = section.offsetHeight - window.innerHeight;
+        if (travel <= 0) return 0;
+        return Math.max(0, Math.min(1, (window.scrollY - section.offsetTop) / travel));
+      }
+
+      function render() {
+        if (!ready) return;
+        const f = Math.round(progress() * (FRAME_COUNT - 1));
+        if (f !== current) { current = f; draw(f); }
+      }
+
+      // Preload frames only once the section is near the viewport
+      const io = new IntersectionObserver((entries) => {
+        if (!entries[0].isIntersecting) return;
+        io.disconnect();
+        for (let i = 0; i < FRAME_COUNT; i++) {
+          const img = new Image();
+          img.decoding = 'async';
+          img.src = `public/images/swing/frame-${pad(i)}.webp`;
+          img.onload = () => {
+            if (++loaded === FRAME_COUNT) { ready = true; sizeCanvas(); current = -1; render(); }
+          };
+          frames[i] = img;
+        }
+      }, { rootMargin: '400px 0px' });
+      io.observe(section);
+
+      let ticking = false;
+      window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => { render(); ticking = false; });
+      }, { passive: true });
+
+      let rt;
+      window.addEventListener('resize', () => {
+        clearTimeout(rt);
+        rt = setTimeout(() => { if (ready) { sizeCanvas(); current = -1; render(); } }, 150);
+      });
+    })();
 
     /* ── ANCHOR SMOOTH SCROLL ──────────────────────────── */
     document.querySelectorAll('a[href^="#"]').forEach(a => {
